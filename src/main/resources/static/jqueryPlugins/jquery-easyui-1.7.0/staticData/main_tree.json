@@ -1,0 +1,138 @@
+[
+	{
+		"pid":0,
+		"id": 1,
+		"text": "权限配置",
+		"state":"open",
+		"children": [
+			{
+				"pid":1,
+				"id": 11,
+				"text": "权限管理",
+				"attributes": {"url": "center.html"}
+			},
+			{
+				"pid":1,
+				"id": 12,
+				"text": "用户赋权",
+				"attributes": {"url": "center.html"}
+			},
+			{
+				"pid":1,
+				"id": 12,
+				"text": "用户降权",
+				"attributes": {"url": "center.html"}
+			}
+		]
+	},
+	{
+		"pid":0,
+		"id": 2,
+		"text": "用户管理",
+		"state":"closed",
+		"children": [
+			{
+				"pid":2,
+				"id": 21,
+				"text": "用户列表",
+				"attributes": {"url": "center.html"}
+			},
+			{
+				"pid":2,
+				"id": 22,
+				"text": "登录记录",
+				"attributes": {"url": "center.html"}
+			},
+			{
+				"pid":2,
+				"id": 23,
+				"text": "注册记录",
+				"attributes": {"url": "center.html"}
+			}
+		]
+	},
+	{
+		"pid":0,
+		"id": 3,
+		"text": "资源管理",
+		"state":"closed",
+		"children": [
+			{
+				"pid":3,
+				"id": 31,
+				"text": "图片管理",
+				"attributes": {"url": "center.html"}
+			},
+			{
+				"pid":3,
+				"id": 32,
+				"text": "附件管理",
+				"attributes": {"url": "center.html"}
+			},
+			{
+				"pid":3,
+				"id": 33,
+				"text": "视频管理",
+				"attributes": {"url": "center.html"}
+			}
+		]
+	},
+	{
+		"pid":0,
+		"id": 4,
+		"text": "资源审核",
+		"state":"closed",
+		"children": [
+			{
+				"pid":4,
+				"id": 41,
+				"text": "图片审核",
+				"attributes": {"url": "center.html"}
+			},
+			{
+				"pid":4,
+				"id": 42,
+				"text": "附件审核",
+				"attributes": {"url": "center.html"}
+			},
+			{
+				"pid":4,
+				"id": 43,
+				"text": "视频审核",
+				"attributes": {"url": "center.html"}
+			}
+		]
+	},
+	{
+		"pid":0,
+		"id": 5,
+		"text": "系统配置",
+		"state":"closed",
+		"children": [
+			{
+				"pid":5,
+				"id": 51,
+				"text": "冻结时长",
+				"attributes": {"url": "center.html"}
+			},
+			{
+				"pid":5,
+				"id": 52,
+				"text": "功能配置",
+				"attributes": {"url": "center.html"}
+			},
+			{
+				"pid":5,
+				"id": 53,
+				"text": "资源控制",
+				"attributes": {"url": "center.html"}
+			},
+			{
+				"pid":5,
+				"id": 54,
+				"text": "好友数量",
+				"attributes": {"url": "center.html"}
+			}
+		]
+	}
+]
