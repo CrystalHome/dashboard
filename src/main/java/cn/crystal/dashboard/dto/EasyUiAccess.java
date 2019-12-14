@@ -1,15 +1,16 @@
 package cn.crystal.dashboard.dto;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Crystal-Chen
- * @Title: AccessTreeGrid
+ * @Title: EasyUiAccess
  * @Package cn.crystal.dashboard.dto
  * @Description:
  * @date 2019/12/14 21:16
  */
-public class AccessTreeGrid {
+public class EasyUiAccess {
     private String id;
 
     private String pid;
@@ -26,7 +27,13 @@ public class AccessTreeGrid {
 
     private String updateTime;
 
-    private List<AccessTreeGrid> children;
+    private List<EasyUiAccess> children;
+
+    private Map<String,String> attributes;
+
+    private String text;
+
+    private String state;
 
     public String getId() {
         return id;
@@ -92,17 +99,41 @@ public class AccessTreeGrid {
         this.updateTime = updateTime;
     }
 
-    public List<AccessTreeGrid> getChildren() {
+    public List<EasyUiAccess> getChildren() {
         return children;
     }
 
-    public void setChildren(List<AccessTreeGrid> children) {
+    public void setChildren(List<EasyUiAccess> children) {
         this.children = children;
+    }
+
+    public Map<String, String> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(Map<String, String> attributes) {
+        this.attributes = attributes;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("AccessTreeGrid{");
+        final StringBuilder sb = new StringBuilder("EasyUiAccess{");
         sb.append("id='").append(id).append('\'');
         sb.append(", pid='").append(pid).append('\'');
         sb.append(", name='").append(name).append('\'');
@@ -112,6 +143,9 @@ public class AccessTreeGrid {
         sb.append(", createTime='").append(createTime).append('\'');
         sb.append(", updateTime='").append(updateTime).append('\'');
         sb.append(", children=").append(children);
+        sb.append(", attributes=").append(attributes);
+        sb.append(", text='").append(text).append('\'');
+        sb.append(", state='").append(state).append('\'');
         sb.append('}');
         return sb.toString();
     }

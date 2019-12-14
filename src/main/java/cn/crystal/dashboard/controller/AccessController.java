@@ -1,6 +1,6 @@
 package cn.crystal.dashboard.controller;
 
-import cn.crystal.dashboard.dto.AccessTreeGrid;
+import cn.crystal.dashboard.dto.EasyUiAccess;
 import cn.crystal.dashboard.service.AccessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,9 +30,9 @@ public class AccessController {
 
     @ResponseBody
     @RequestMapping("getAccessTreeGrid")
-    public List<AccessTreeGrid> getAccessTreeDrid(){
-        List<AccessTreeGrid> accessTreeGrids = accessService.getAccessTreeGrid();
-        return accessTreeGrids;
+    public List<EasyUiAccess> getAccessTreeDrid(){
+        List<EasyUiAccess> easyUiAccesses = accessService.getAccessTreeGrid();
+        return easyUiAccesses;
     }
 
 

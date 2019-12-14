@@ -4,12 +4,11 @@ import cn.crystal.dashboard.common.Common;
 import cn.crystal.dashboard.config.Config;
 import cn.crystal.dashboard.dao.mapper.AccessMapper;
 import cn.crystal.dashboard.dao.model.Access;
-import cn.crystal.dashboard.dto.AccessTreeGrid;
+import cn.crystal.dashboard.dto.EasyUiAccess;
 import cn.crystal.dashboard.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,9 +28,9 @@ public class AccessService {
      * @Title: getAccessTreeDrid
      * @Description: 获取权限管理页面数据表格数据
      */
-    public List<AccessTreeGrid> getAccessTreeGrid(){
+    public List<EasyUiAccess> getAccessTreeGrid(){
         List<Access> accesses = accessMapper.getAccesses();
-        List<AccessTreeGrid> result = Common.parseAccessTreeGrid(accesses);
+        List<EasyUiAccess> result = Common.parseAccessTreeGrid(accesses);
         return result;
     }
 
