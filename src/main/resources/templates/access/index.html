@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="copyright" content="www.crystal-home.cn">
+    <meta http-equiv="cache-control" content="no-store">
+
+    <title>控制台</title>
+
+    <link id="style" rel="stylesheet" type="text/css" href="/jqueryPlugins/jquery-easyui-1.7.0/css/easyui-them-gray.css">
+    <link rel="stylesheet" type="text/css" href="/jqueryPlugins/jquery-easyui-1.7.0/css/icon.css">
+    <script type="text/javascript" src="/javascript/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="/jqueryPlugins/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/jqueryPlugins/jquery-easyui-1.7.0/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+
+    <table id="accessTreeGrid" />
+
+    <script type="text/javascript">
+        $('#accessTreeGrid').treegrid({
+            url:'/access/getAccessTreeGrid',
+            method:'post',
+            loadMsg:'正在加载',
+            idField:'id',
+            fit:true,
+            fitColumns:true,
+            rownumbers:true,
+            striped:true,
+            checkOnSelect:true,
+            treeField:'name',
+            checkbox:true,
+            // onlyLeafCheck:true,
+            lines:true,
+            animate:true,
+            columns:[
+                [
+                    {title:'id',field:'id',hidden:true},
+                    {field:'name',title:'权限名称',width:80},
+                    {field:'status',title:'记录状态',width:80},
+                    {field:'actionUrl',title:'事件地址',width:80},
+                    {field:'iconCls',title:'图标样式',width:80},
+                    {field:'updateTime',title:'更新时间',width:80},
+                    {field:'createTime',title:'创建时间',width:80}
+                ]
+            ]
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,11 +1,9 @@
 package cn.crystal.dashboard.controller;
 
-import cn.crystal.dashboard.model.Access;
+import cn.crystal.dashboard.dto.AccessTreeGrid;
 import cn.crystal.dashboard.service.AccessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -25,23 +23,21 @@ public class AccessController {
     @Autowired
     AccessService accessService;
 
-    @RequestMapping("accessIndex")
-    public String selectAllAccess(Model model){
-        List<Access> accesses = accessService.selectAllAccess();
-        model.addAttribute("accesses",accesses);
-        return "accessIndex";
+    @RequestMapping("index")
+    public String index(){
+        return "access/index";
     }
 
     @ResponseBody
-    @RequestMapping("selectAllAccess")
-    public List<Access> selectAllAccess(){
-        List<Access> accesses = accessService.selectAllAccess();
-        return accesses;
+    @RequestMapping("getAccessTreeGrid")
+    public List<AccessTreeGrid> getAccessTreeDrid(){
+        List<AccessTreeGrid> accessTreeGrids = accessService.getAccessTreeGrid();
+        return accessTreeGrids;
     }
 
-    @ResponseBody
-    @RequestMapping("get/{id}")
-    public String selectAllAccess(@PathVariable("id") String age){
-        return age;
+
+    @RequestMapping("getAccessTreeGridTest")
+    public String getAccessTreeGridTest(){
+        return "access/index";
     }
 }

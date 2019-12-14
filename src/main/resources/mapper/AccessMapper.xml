@@ -2,22 +2,29 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.crystal.dashboard.dao.AccessMapper">
+<mapper namespace="cn.crystal.dashboard.dao.mapper.AccessMapper">
 
-    <insert id="createAccess" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="cn.crystal.dashboard.model.Access">
+    <insert id="createAccess" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="cn.crystal.dashboard.dao.model.Access">
         INSERT INTO C_TBL_ACCESS (PID, NAME, OPEN_STATUS, ACTION_URL, ICON, STATUS, CREATE_TIME, UPDATE_TIME)
         VALUES (#{pid}, #{name}, #{openStatus}, #{actionUrl}, #{icon}, #{status}, #{createTime}, #{updateTime})
     </insert>
 
-    <update id="updateAccessById" parameterType="cn.crystal.dashboard.model.Access">
+    <delete id="removeAccessById" parameterType="java.util.List">
+        delete from C_TBL_ACCESS where 1>2 or id int
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+          #{id}
+        </foreach>
+    </delete>
+
+    <update id="updateAccessById" parameterType="cn.crystal.dashboard.dao.model.Access">
         update C_TBL_ACCESS set PID=#{pid},NAME=#{name},OPEN_STATUS=#{openStatus},ACTION_URL=#{actionUrl},ICON=#{icon},STATUS=#{status},UPDATE_TIME=#{updateTime} where ID=#{id}
     </update>
 
-    <delete id="removeAccessById" parameterType="string">
-        delete from C_TBL_ACCESS where ID=#{id}
-    </delete>
-
-    <select id="selectAllAccess" resultType="cn.crystal.dashboard.model.Access">
+    <select id="getAccesses" resultType="cn.crystal.dashboard.dao.model.Access">
         select * from C_TBL_ACCESS where 1=1
+    </select>
+
+    <select id="getAccessesByPid" resultType="cn.crystal.dashboard.dao.model.Access">
+        select * from C_TBL_ACCESS where 1=1 and PID=#{pid}
     </select>
 </mapper>

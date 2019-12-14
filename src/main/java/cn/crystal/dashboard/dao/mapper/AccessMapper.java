@@ -1,6 +1,6 @@
-package cn.crystal.dashboard.dao;
+package cn.crystal.dashboard.dao.mapper;
 
-import cn.crystal.dashboard.model.Access;
+import cn.crystal.dashboard.dao.model.Access;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -31,12 +31,18 @@ public interface AccessMapper {
      * @Title: removeAccessById
      * @Description: 根据ID删除权限
      */
-    int removeAccessById(String id);
+    int removeAccessById(List ids);
 
    /**
-    * @Title: getAllAccess
-    * @Description: 根据条件查询权限
+    * @Title: getAccessByCondition
+    * @Description: 查询所有权限
     */
-    List<Access> selectAllAccess();
+    List<Access> getAccesses();
+
+    /**
+     * @Title: getAccessesByPid
+     * @Description: 根据父节点ID查询所有权限
+     */
+    List<Access> getAccessesByPid(String pid);
 
 }

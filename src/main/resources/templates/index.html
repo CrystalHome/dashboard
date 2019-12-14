@@ -29,7 +29,7 @@
 
     <!-- 左侧区域 -->
     <div data-options="border:false, split:true, iconCls:'icon-search', collapsible:false, region:'west',title:'West'" style="width:200px;">
-        <ul id="main_tree" class="easyui-tree" data-options="animate:true, lines:false, url:'/initEasyUiTree',method:'get'"></ul>
+        <ul id="main_tree" class="easyui-tree" data-options="animate:true, lines:false, url:'/initEasyUiTree',method:'post'"></ul>
     </div>
 
     <!-- 中部内容区 -->
@@ -115,9 +115,7 @@
         var nodeChildrens=$(tree).tree('getChildren',node.target);
         if(nodeChildrens.length == 0){
             var cbp = "";
-            var attributes = node.attributes;
             var url = node.attributes.url;
-        //    var content='<iframe src="'+cbp+url+'" width="100%" height="100%" scrolling="auto" style="border: none;"></iframe>';
             var tabExists = $("#centerTabs").tabs('exists',node.text);
             console.info(cbp+url);
             if(tabExists){
@@ -126,7 +124,6 @@
                 $("#centerTabs").tabs('add',{
                     title:node.text,
                     selected:true,
-                    //	content:content,
                     href:cbp+url,
                     closable:true
                 });

@@ -1,7 +1,7 @@
 package cn.crystal.dashboard.controller;
 
 import cn.crystal.dashboard.dto.EasyuiTree;
-import cn.crystal.dashboard.model.Access;
+import cn.crystal.dashboard.dao.model.Access;
 import cn.crystal.dashboard.service.AccessService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,7 +38,7 @@ public class IndexController {
     @ResponseBody
     @RequestMapping("initEasyUiTree")
     public List<EasyuiTree> initEasyUiTree(){
-        List<Access> accesses = accessService.selectAllAccess();
+        List<Access> accesses = accessService.getAccesses();
 
         List<EasyuiTree> easyuiTrees = new ArrayList<>();
         for (Access access : accesses) {

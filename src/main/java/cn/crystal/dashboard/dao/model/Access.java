@@ -1,9 +1,9 @@
-package cn.crystal.dashboard.model;
+package cn.crystal.dashboard.dao.model;
 
 /**
  * @author Crystal-Chen
  * @Title: Access
- * @Package cn.crystal.dashboard.model
+ * @Package cn.crystal.dashboard.dao.model
  * @Description:
  * @date 2019/12/9 0:25
  */
