@@ -9,5 +9,5 @@ package cn.crystal.dashboard.config;
  */
 public class Config {
     public static final String DEFAULT_ACTION_URL = "/";
-    public static final String DEFAULT_ICON_CLS="icon-icon-tip";
+    public static final String DEFAULT_ICON_CLS="icon-lock";
 }

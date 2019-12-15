@@ -1,7 +1,7 @@
 package cn.crystal.dashboard.common;
 
-import cn.crystal.dashboard.dao.model.Access;
-import cn.crystal.dashboard.dto.EasyUiAccess;
+import cn.crystal.dashboard.dao.model.Permission;
+import cn.crystal.dashboard.dto.EasyUiPermission;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -18,45 +18,47 @@ import java.util.Map;
  */
 public class Common {
 
-    public static List<EasyUiAccess> parseAccessTreeGrid(List<Access> accesses){
-        List<EasyUiAccess> easyUiAccesses = new ArrayList<>();
-        for (Access access : accesses) {
-            if(StringUtils.equals(access.getPid(),"0")){
-                EasyUiAccess easyUiAccess = convetAccessTreeGrid(access);
-                List<EasyUiAccess> children = getChildrenByPid(accesses,access.getId());
-                easyUiAccess.setChildren(children);
-                easyUiAccesses.add(easyUiAccess);
+    public static List<EasyUiPermission> parsePermissionTreeGrid(List<Permission> permissions){
+        List<EasyUiPermission> easyUiPermissions = new ArrayList<>();
+        for (Permission permission : permissions) {
+            if(StringUtils.equals(permission.getPid(),"0")){
+                EasyUiPermission easyUiPermission = convetPermissionTreeGrid(permission);
+                List<EasyUiPermission> children = getChildrenByPid(permissions, permission.getId());
+                easyUiPermission.setChildren(children);
+                easyUiPermissions.add(easyUiPermission);
             }
         }
-        return easyUiAccesses;
+        return easyUiPermissions;
     }
 
-    private static List<EasyUiAccess> getChildrenByPid(List<Access> accesses, String pid){
-        List<EasyUiAccess> easyUiAccesses = new ArrayList<>();
-        for (Access access : accesses) {
-            if(StringUtils.equals(access.getPid(),pid)){
-                EasyUiAccess easyUiAccess = convetAccessTreeGrid(access);
-                easyUiAccesses.add(easyUiAccess);
+    private static List<EasyUiPermission> getChildrenByPid(List<Permission> permissions, String pid){
+        List<EasyUiPermission> easyUiPermissions = new ArrayList<>();
+        for (Permission permission : permissions) {
+            if(StringUtils.equals(permission.getPid(),pid)){
+                EasyUiPermission easyUiPermission = convetPermissionTreeGrid(permission);
+                List<EasyUiPermission> children = getChildrenByPid(permissions, permission.getId());
+                easyUiPermission.setChildren(children);
+                easyUiPermissions.add(easyUiPermission);
             }
         }
-        return easyUiAccesses;
+        return easyUiPermissions;
     }
 
-    private static EasyUiAccess convetAccessTreeGrid(Access access){
-        EasyUiAccess easyUiAccess = new EasyUiAccess();
-        easyUiAccess.setId(access.getId());
-        easyUiAccess.setPid(access.getPid());
-        easyUiAccess.setName(access.getName());
-        easyUiAccess.setStatus(access.getStatus());
-        easyUiAccess.setActionUrl(access.getActionUrl());
-        easyUiAccess.setIconCls(access.getIcon());
-        easyUiAccess.setCreateTime(access.getCreateTime());
-        easyUiAccess.setUpdateTime(access.getUpdateTime());
-        easyUiAccess.setText(access.getName());
-        easyUiAccess.setState(access.getOpenStatus());
+    private static EasyUiPermission convetPermissionTreeGrid(Permission permission){
+        EasyUiPermission easyUiPermission = new EasyUiPermission();
+        easyUiPermission.setId(permission.getId());
+        easyUiPermission.setPid(permission.getPid());
+        easyUiPermission.setName(permission.getName());
+        easyUiPermission.setStatus(permission.getStatus());
+        easyUiPermission.setActionUrl(permission.getActionUrl());
+        easyUiPermission.setIconCls(permission.getIcon());
+        easyUiPermission.setCreateTime(permission.getCreateTime());
+        easyUiPermission.setUpdateTime(permission.getUpdateTime());
+        easyUiPermission.setText(permission.getName());
+        easyUiPermission.setState(permission.getOpenStatus());
         Map<String,String> attributes = new HashMap<>();
-        attributes.put("url",access.getActionUrl());
-        easyUiAccess.setAttributes(attributes);
-        return easyUiAccess;
+        attributes.put("url", permission.getActionUrl());
+        easyUiPermission.setAttributes(attributes);
+        return easyUiPermission;
     }
 }

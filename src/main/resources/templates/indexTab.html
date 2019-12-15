@@ -19,7 +19,7 @@
         <div style="width: 245px;margin-right: 10px;float: right;">
             <select id="changeStyle" class="easyui-combobox" name="language" label="皮肤主题" style="width:230px" data-options="editable:false">
                 <option value="1">默认主题</option>
-                <option value="2" selected="selected">灰色主题</option>
+                <option value="2">灰色主题</option>
                 <option value="3">黑色主题</option>
                 <option value="4">BootStrap主题</option>
                 <option value="5">黑色主题</option>
@@ -33,8 +33,15 @@
     </div>
 
     <!-- 中部内容区 -->
-    <div data-options="border:false, fit:false, showHeader:true, split:true, collapsible:false, region:'center', href:'/center.html', title:'操作区'">
-
+    <div data-options="border:false, fit:false, showHeader:false, split:true, collapsible:false, region:'center'">
+        <div id="centerTabs" class="easyui-tabs" data-options="fit:true,narrow:true,border:false, tabWidth:'150'">
+            <div id="centerTabs_default" title="主页" href="center.html"></div>
+           <!--
+            <div id="centerTabs_default" title="主页">
+                <iframe src="${cbp}/components/default_center.jsp" width="100%" height="100%" scrolling="auto" style="border: none;"></iframe>
+            </div>
+            -->
+        </div>
     </div>
 </body>
 
@@ -107,8 +114,20 @@
         /*当前选中节点没有子节点时，触发相应事件*/
         var nodeChildrens=$(tree).tree('getChildren',node.target);
         if(nodeChildrens.length == 0){
+            var cbp = "";
             var url = node.attributes.url;
-            $("body").layout('panel','center').panel('refresh',url).panel('setTitle',node.text);
+            var tabExists = $("#centerTabs").tabs('exists',node.text);
+            console.info(cbp+url);
+            if(tabExists){
+                $("#centerTabs").tabs('select',node.text);
+            }else{
+                $("#centerTabs").tabs('add',{
+                    title:node.text,
+                    selected:true,
+                    href:cbp+url,
+                    closable:true
+                });
+            }
         }
     }
 </script>

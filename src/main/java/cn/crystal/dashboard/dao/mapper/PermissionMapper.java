@@ -1,48 +1,48 @@
 package cn.crystal.dashboard.dao.mapper;
 
-import cn.crystal.dashboard.dao.model.Access;
+import cn.crystal.dashboard.dao.model.Permission;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
 /**
  * @author Crystal-Chen
- * @Title: AccessMapper
+ * @Title: PermissionMapper
  * @Package cn.crystal.dashboard.dao.mapper
  * @Description:
  * @date 2019/12/9 0:32
  */
 @Mapper
-public interface AccessMapper {
+public interface PermissionMapper {
 
     /**
-     * @Title: createAccess
+     * @Title: createPermission
      * @Description: 添加权限
      */
-    int createAccess(Access access);
+    int createPermission(Permission permission);
 
     /**
-     * @Title: updateAccessById
+     * @Title: updatePermissionById
      * @Description: 根据ID修改权限
      */
-    int updateAccessById(Access access);
+    int updatePermissionById(Permission permission);
 
     /**
-     * @Title: removeAccessById
+     * @Title: removePermissionById
      * @Description: 根据ID删除权限
      */
-    int removeAccessById(List ids);
+    int removePermissionById(List ids);
 
    /**
-    * @Title: getAccessByCondition
+    * @Title: getPermissionByCondition
     * @Description: 查询所有权限
     */
-    List<Access> getAccesses();
+    List<Permission> getPermissiones();
 
     /**
-     * @Title: getAccessesByPid
+     * @Title: getPermissionesByPid
      * @Description: 根据父节点ID查询所有权限
      */
-    List<Access> getAccessesByPid(String pid);
+    List<Permission> getPermissionesByPid(String pid);
 
 }

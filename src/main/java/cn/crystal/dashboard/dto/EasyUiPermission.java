@@ -5,12 +5,12 @@ import java.util.Map;
 
 /**
  * @author Crystal-Chen
- * @Title: EasyUiAccess
+ * @Title: EasyUiPermission
  * @Package cn.crystal.dashboard.dto
  * @Description:
  * @date 2019/12/14 21:16
  */
-public class EasyUiAccess {
+public class EasyUiPermission {
     private String id;
 
     private String pid;
@@ -27,7 +27,7 @@ public class EasyUiAccess {
 
     private String updateTime;
 
-    private List<EasyUiAccess> children;
+    private List<EasyUiPermission> children;
 
     private Map<String,String> attributes;
 
@@ -99,11 +99,11 @@ public class EasyUiAccess {
         this.updateTime = updateTime;
     }
 
-    public List<EasyUiAccess> getChildren() {
+    public List<EasyUiPermission> getChildren() {
         return children;
     }
 
-    public void setChildren(List<EasyUiAccess> children) {
+    public void setChildren(List<EasyUiPermission> children) {
         this.children = children;
     }
 
@@ -133,7 +133,7 @@ public class EasyUiAccess {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("EasyUiAccess{");
+        final StringBuilder sb = new StringBuilder("EasyUiPermission{");
         sb.append("id='").append(id).append('\'');
         sb.append(", pid='").append(pid).append('\'');
         sb.append(", name='").append(name).append('\'');

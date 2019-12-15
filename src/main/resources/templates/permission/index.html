@@ -9,17 +9,18 @@
 
     <link id="style" rel="stylesheet" type="text/css" href="/jqueryPlugins/jquery-easyui-1.7.0/css/easyui-them-gray.css">
     <link rel="stylesheet" type="text/css" href="/jqueryPlugins/jquery-easyui-1.7.0/css/icon.css">
+    <link rel="stylesheet" type="text/css" href="/jqueryPlugins/font-awesome-4.7.0/css/font-awesome.min.css">
     <script type="text/javascript" src="/javascript/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="/jqueryPlugins/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
     <script type="text/javascript" src="/jqueryPlugins/jquery-easyui-1.7.0/easyui-lang-zh_CN.js"></script>
 </head>
 <body>
 
-    <table id="easyUiAccess" />
+    <table id="easyUiPermission" />
 
     <script type="text/javascript">
-        $('#easyUiAccess').treegrid({
-            url:'/access/getAccessTreeGrid',
+        $('#easyUiPermission').treegrid({
+            url:'/permission/getPermissionTreeGrid',
             method:'post',
             loadMsg:'正在加载',
             idField:'id',
@@ -43,6 +44,36 @@
                     {field:'updateTime',title:'更新时间',width:80},
                     {field:'createTime',title:'创建时间',width:80}
                 ]
+            ],
+            toolbar:[
+                {
+                    text:'添加权限',
+                    iconCls:'icon-lock',
+                    handler:function () {
+                        alert('添加')
+                    }
+                },'-',
+                {
+                    text:'修改权限',
+                    iconCls:'icon-lock',
+                    handler:function () {
+                        alert('修改')
+                    }
+                },'-',
+                {
+                    text:'删除权限',
+                    iconCls:'icon-lock',
+                    handler:function () {
+                        alert('删除')
+                    }
+                },'-',
+                {
+                    text:'刷新页面',
+                    iconCls:'icon-lock',
+                    handler:function () {
+                        $('#easyUiPermission').treegrid('reload');
+                    }
+                }
             ]
         });
 

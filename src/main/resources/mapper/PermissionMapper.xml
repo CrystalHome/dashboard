@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.crystal.dashboard.dao.mapper.PermissionMapper">
+
+    <insert id="createPermission" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="cn.crystal.dashboard.dao.model.Permission">
+        INSERT INTO C_TBL_PERMISSION (PID, NAME, OPEN_STATUS, ACTION_URL, ICON, STATUS, CREATE_TIME, UPDATE_TIME)
+        VALUES (#{pid}, #{name}, #{openStatus}, #{actionUrl}, #{icon}, #{status}, #{createTime}, #{updateTime})
+    </insert>
+
+    <delete id="removePermissionById" parameterType="java.util.List">
+        delete from C_TBL_PERMISSION where 1>2 or id int
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+          #{id}
+        </foreach>
+    </delete>
+
+    <update id="updatePermissionById" parameterType="cn.crystal.dashboard.dao.model.Permission">
+        update C_TBL_PERMISSION set PID=#{pid},NAME=#{name},OPEN_STATUS=#{openStatus},ACTION_URL=#{actionUrl},ICON=#{icon},STATUS=#{status},UPDATE_TIME=#{updateTime} where ID=#{id}
+    </update>
+
+    <select id="getPermissiones" resultType="cn.crystal.dashboard.dao.model.Permission">
+        select * from C_TBL_PERMISSION where 1=1
+    </select>
+
+    <select id="getPermissionesByPid" resultType="cn.crystal.dashboard.dao.model.Permission">
+        select * from C_TBL_PERMISSION where 1=1 and PID=#{pid}
+    </select>
+</mapper>

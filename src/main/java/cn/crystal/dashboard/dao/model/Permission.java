@@ -2,12 +2,12 @@ package cn.crystal.dashboard.dao.model;
 
 /**
  * @author Crystal-Chen
- * @Title: Access
+ * @Title: Permission
  * @Package cn.crystal.dashboard.dao.model
  * @Description:
  * @date 2019/12/9 0:25
  */
-public class Access {
+public class Permission {
 
     private String id;
 
@@ -101,7 +101,7 @@ public class Access {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Access{");
+        final StringBuffer sb = new StringBuffer("Permission{");
         sb.append("id='").append(id).append('\'');
         sb.append(", pid='").append(pid).append('\'');
         sb.append(", name='").append(name).append('\'');

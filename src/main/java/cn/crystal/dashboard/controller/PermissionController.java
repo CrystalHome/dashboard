@@ -1,5 +1,6 @@
 package cn.crystal.dashboard.controller;
 
+import cn.crystal.dashboard.dao.model.Permission;
 import cn.crystal.dashboard.dto.EasyUiPermission;
 import cn.crystal.dashboard.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,30 +12,35 @@ import java.util.List;
 
 /**
  * @author Crystal-Chen
- * @Title: IndexController
+ * @Title: PermissionController
  * @Package cn.crystal.dashboard.controller
  * @Description:
- * @date 2019/12/10 22:19
+ * @date 2019/12/9 23:26
  */
 @Controller
-public class IndexController {
+@RequestMapping("/permission")
+public class PermissionController {
 
     @Autowired
     PermissionService permissionService;
 
-    @RequestMapping("/")
+    @RequestMapping("index")
     public String index(){
-        return "index";
+        return "permission/index";
     }
 
-    /**
-     * @Title: initEasyUiTree
-     * @Description: 加载EasyUi树型菜单
-     */
     @ResponseBody
-    @RequestMapping("initEasyUiTree")
-    public List<EasyUiPermission> initEasyUiTree(){
+    @RequestMapping("createPermission")
+    public void createPermission(Permission permission){
+        System.out.println(permission);
+    //    permissionService.createPermission(permission);
+    }
+
+    @ResponseBody
+    @RequestMapping("getPermissionTreeGrid")
+    public List<EasyUiPermission> getPermissionTreeGrid(){
         List<EasyUiPermission> easyUiPermissions = permissionService.getPermissionTreeGrid();
         return easyUiPermissions;
     }
+
 }
