@@ -17,11 +17,15 @@ public class EasyUiPermission {
 
     private String name;
 
-    private String status;
-
     private String actionUrl;
 
     private String iconCls;
+
+    private String text;
+
+    private String state;
+
+    private String status;
 
     private String createTime;
 
@@ -30,10 +34,6 @@ public class EasyUiPermission {
     private List<EasyUiPermission> children;
 
     private Map<String,String> attributes;
-
-    private String text;
-
-    private String state;
 
     public String getId() {
         return id;
@@ -59,14 +59,6 @@ public class EasyUiPermission {
         this.name = name;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getActionUrl() {
         return actionUrl;
     }
@@ -81,6 +73,30 @@ public class EasyUiPermission {
 
     public void setIconCls(String iconCls) {
         this.iconCls = iconCls;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getCreateTime() {
@@ -115,37 +131,21 @@ public class EasyUiPermission {
         this.attributes = attributes;
     }
 
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder("EasyUiPermission{");
         sb.append("id='").append(id).append('\'');
         sb.append(", pid='").append(pid).append('\'');
         sb.append(", name='").append(name).append('\'');
-        sb.append(", status='").append(status).append('\'');
         sb.append(", actionUrl='").append(actionUrl).append('\'');
         sb.append(", iconCls='").append(iconCls).append('\'');
+        sb.append(", text='").append(text).append('\'');
+        sb.append(", state='").append(state).append('\'');
+        sb.append(", status='").append(status).append('\'');
         sb.append(", createTime='").append(createTime).append('\'');
         sb.append(", updateTime='").append(updateTime).append('\'');
         sb.append(", children=").append(children);
         sb.append(", attributes=").append(attributes);
-        sb.append(", text='").append(text).append('\'');
-        sb.append(", state='").append(state).append('\'');
         sb.append('}');
         return sb.toString();
     }

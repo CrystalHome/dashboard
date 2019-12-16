@@ -37,10 +37,12 @@
             columns:[
                 [
                     {title:'id',field:'id',hidden:true},
+                    {title:'pid',field:'pid',hidden:true},
                     {field:'name',title:'权限名称',width:80},
-                    {field:'status',title:'记录状态',width:80},
+                    {field:'state',title:'折叠状态',width:80},
                     {field:'actionUrl',title:'事件地址',width:80},
                     {field:'iconCls',title:'图标样式',width:80},
+                    {field:'status',title:'记录状态',width:80},
                     {field:'updateTime',title:'更新时间',width:80},
                     {field:'createTime',title:'创建时间',width:80}
                 ]
@@ -50,7 +52,7 @@
                     text:'添加权限',
                     iconCls:'icon-lock',
                     handler:function () {
-                        alert('添加')
+                        createDialog();
                     }
                 },'-',
                 {
@@ -77,6 +79,31 @@
             ]
         });
 
+        function createDialog(){
+            var dialog = $("<div />").dialog({
+                width : 350,
+                height : 420,
+                modal : true,
+                title:'添加权限',
+                closable:false,
+                href:'/permission/createPermissionForm',
+                buttons:[{
+                    text:'Save',
+                    iconCls:'icon-lock',
+                    handler:function(){
+                        alert('SAVE')
+                        $(dialog).dialog('destroy');
+                    }
+                },{
+                    text:'Close',
+                    iconCls:'icon-lock',
+                    handler:function(){
+                        $(dialog).dialog('destroy');
+                    }
+                }]
+
+            });
+        }
     </script>
 </body>
 

@@ -29,6 +29,11 @@ public class PermissionController {
         return "permission/index";
     }
 
+    @RequestMapping("createPermissionForm")
+    public String createPermissionPage(){
+        return "permission/createPermissionForm";
+    }
+
     @ResponseBody
     @RequestMapping("createPermission")
     public void createPermission(Permission permission){
