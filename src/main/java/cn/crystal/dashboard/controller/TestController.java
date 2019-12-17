@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Description:
  * @date 2019/12/16 23:19
  */
-@Controller("/test")
+@Controller
+@RequestMapping("/test")
 public class TestController {
 
     @RequestMapping("login")

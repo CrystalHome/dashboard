@@ -36,13 +36,32 @@
             animate:true,
             columns:[
                 [
-                    {title:'id',field:'id',hidden:true},
-                    {title:'pid',field:'pid',hidden:true},
                     {field:'name',title:'权限名称',width:80},
-                    {field:'state',title:'折叠状态',width:80},
+                    {title:'唯一标识',field:'id',width:80},
+                    {title:'父节点标识',field:'pid',width:80},
+                    {field:'state',title:'折叠状态',width:80,formatter: function(value,row,index){
+                            if (value=='open'){
+                                return '展开';
+                            }else{
+                                return '折叠';
+                            }
+                        }},
                     {field:'actionUrl',title:'事件地址',width:80},
                     {field:'iconCls',title:'图标样式',width:80},
-                    {field:'status',title:'记录状态',width:80},
+                    {field:'status',title:'记录状态',width:80,
+                        formatter: function(value,row,index){
+                            if (value=='0'){
+                                return '禁用';
+                            }else{
+                                return '启用';
+                            }
+                        },
+                        styler:function(value,row,index){
+                            if (value=='0'){
+                                return 'color:red;';
+                            }
+                        }
+                    },
                     {field:'updateTime',title:'更新时间',width:80},
                     {field:'createTime',title:'创建时间',width:80}
                 ]
@@ -79,6 +98,9 @@
             ]
         });
 
+        /**
+         * 添加对话框
+         */
         function createDialog(){
             var dialog = $("<div />").dialog({
                 width : 350,
@@ -88,21 +110,43 @@
                 closable:false,
                 href:'/permission/createPermissionForm',
                 buttons:[{
-                    text:'Save',
+                    text:'保存',
                     iconCls:'icon-lock',
                     handler:function(){
-                        alert('SAVE')
-                        $(dialog).dialog('destroy');
+                        savePermission(dialog);
                     }
                 },{
-                    text:'Close',
+                    text:'取消',
                     iconCls:'icon-lock',
                     handler:function(){
                         $(dialog).dialog('destroy');
+                        $('#easyUiPermission').treegrid('reload');
                     }
                 }]
 
             });
+        }
+
+        /**
+         * 请求后台添加
+         */
+        function savePermission(dialog){
+           var validateStatus = $('#createPermissionForm').form("validate");
+           if(validateStatus){
+               $.ajax({
+                   url:'/permission/createPermission',
+                   type:'POST',
+                   data:$('#createPermissionForm').serialize(),
+                   success:function(data){
+                       $(dialog).dialog('destroy');
+                       $('#easyUiPermission').treegrid('reload');
+                       $.messager.alert('info','权限添加成功！');
+                   },
+                   error:function (data) {
+                       $.messager.alert('error','权限添失败！');
+                   }
+               });
+           }
         }
     </script>
 </body>

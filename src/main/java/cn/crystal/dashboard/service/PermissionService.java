@@ -40,8 +40,6 @@ public class PermissionService {
      */
     public int createPermission(Permission permission){
         String currentTime = DateUtils.getCurrentDateString();
-        permission.setActionUrl(Config.DEFAULT_ACTION_URL);
-        permission.setIcon(Config.DEFAULT_ICON_CLS);
         permission.setCreateTime(currentTime);
         permission.setUpdateTime(currentTime);
         return permissionMapper.createPermission(permission);

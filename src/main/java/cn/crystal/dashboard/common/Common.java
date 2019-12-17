@@ -22,23 +22,27 @@ public class Common {
         List<EasyUiPermission> easyUiPermissions = new ArrayList<>();
         for (Permission permission : permissions) {
             if(StringUtils.equals(permission.getPid(),"0")){
-                EasyUiPermission easyUiPermission = convetPermissionTreeGrid(permission);
-                List<EasyUiPermission> children = getChildrenByPid(permissions, permission.getId());
-                easyUiPermission.setChildren(children);
-                easyUiPermissions.add(easyUiPermission);
+                convetAndGetChild(permissions, easyUiPermissions, permission);
             }
         }
         return easyUiPermissions;
+    }
+
+    private static void convetAndGetChild(List<Permission> permissions, List<EasyUiPermission> easyUiPermissions, Permission permission) {
+        EasyUiPermission easyUiPermission = convetPermissionTreeGrid(permission);
+        List<EasyUiPermission> children = getChildrenByPid(permissions, permission.getId());
+        easyUiPermission.setChildren(children);
+        if(children.size() == 0){
+            easyUiPermission.setState("1");
+        }
+        easyUiPermissions.add(easyUiPermission);
     }
 
     private static List<EasyUiPermission> getChildrenByPid(List<Permission> permissions, String pid){
         List<EasyUiPermission> easyUiPermissions = new ArrayList<>();
         for (Permission permission : permissions) {
             if(StringUtils.equals(permission.getPid(),pid)){
-                EasyUiPermission easyUiPermission = convetPermissionTreeGrid(permission);
-                List<EasyUiPermission> children = getChildrenByPid(permissions, permission.getId());
-                easyUiPermission.setChildren(children);
-                easyUiPermissions.add(easyUiPermission);
+                convetAndGetChild(permissions, easyUiPermissions, permission);
             }
         }
         return easyUiPermissions;

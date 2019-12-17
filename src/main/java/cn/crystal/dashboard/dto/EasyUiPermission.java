@@ -1,5 +1,8 @@
 package cn.crystal.dashboard.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.List;
 import java.util.Map;
 
@@ -88,7 +91,11 @@ public class EasyUiPermission {
     }
 
     public void setState(String state) {
-        this.state = state;
+        this.state = "open";
+
+        if(StringUtils.equals("0",state)){
+            this.state = "closed";
+        }
     }
 
     public String getStatus() {

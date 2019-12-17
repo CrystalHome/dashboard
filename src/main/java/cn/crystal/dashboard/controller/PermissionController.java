@@ -24,28 +24,41 @@ public class PermissionController {
     @Autowired
     PermissionService permissionService;
 
+    /**
+     * 权限列表页面
+     * @return
+     */
     @RequestMapping("index")
     public String index(){
         return "permission/index";
     }
 
-    @RequestMapping("createPermissionForm")
-    public String createPermissionPage(){
-        return "permission/createPermissionForm";
-    }
-
-    @ResponseBody
-    @RequestMapping("createPermission")
-    public void createPermission(Permission permission){
-        System.out.println(permission);
-    //    permissionService.createPermission(permission);
-    }
-
+    /**
+     * 权限列表查询
+     * @return
+     */
     @ResponseBody
     @RequestMapping("getPermissionTreeGrid")
     public List<EasyUiPermission> getPermissionTreeGrid(){
         List<EasyUiPermission> easyUiPermissions = permissionService.getPermissionTreeGrid();
         return easyUiPermissions;
     }
+
+    /**
+     * 权限添加页面
+     * @return
+     */
+    @RequestMapping("createPermissionForm")
+    public String createPermissionPage(){
+        return "permission/createPermissionForm";
+    }
+
+    @RequestMapping("createPermission")
+    @ResponseBody
+    public void createPermission(Permission permission){
+        System.out.println(permission);
+        permissionService.createPermission(permission);
+    }
+
 
 }
