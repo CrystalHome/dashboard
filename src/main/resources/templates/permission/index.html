@@ -31,8 +31,8 @@
             striped:true,
             checkOnSelect:true,
             treeField:'name',
-            checkbox:true,
-            onlyLeafCheck:true,
+        //    checkbox:true,
+         //   onlyLeafCheck:true,
             lines:true,
             animate:true,
             columns:[
@@ -100,12 +100,12 @@
                         type:'POST',
                         data:{id:id},
                         success:function(data){
-                            $.messager.alert('info','权限删除成功！');
+                            $.messager.alert('成功','权限删除成功！','info');
                             $('#easyUiPermission').treegrid('reload');
                             $('#main_tree').tree('reload');
                         },
                         error:function (data) {
-                            $.messager.alert('error','权限删除失败！');
+                            $.messager.alert('错误','权限删除失败！','error');
                         }
                     });
                 }
@@ -154,10 +154,10 @@
                    success:function(data){
                        $(dialog).dialog('destroy');
                        $('#easyUiPermission').treegrid('reload');
-                       $.messager.alert('info','权限添加成功！');
+                       $.messager.alert('成功','权限添加成功！','info');
                    },
                    error:function (data) {
-                       $.messager.alert('error','权限添加失败！');
+                       $.messager.alert('错误','权限添加失败！','error');
                    }
                });
            }
@@ -207,11 +207,11 @@
                    success:function(data){
                        $(dialog).dialog('destroy');
                        $('#easyUiPermission').treegrid('reload');
-                       $.messager.alert('info','权限修改成功！');
+                       $.messager.alert('成功','权限修改成功！','info');
                        $('#main_tree').tree('reload');
                    },
                    error:function (data) {
-                       $.messager.alert('error','权限修改失败！');
+                       $.messager.alert('错误','权限修改失败！','error');
                    }
                });
            }
