@@ -54,14 +54,6 @@ public class PermissionService {
         return permission;
     }
 
-
-
-
-
-
-
-
-
     /**
      * @Title: updatePermissionById
      * @Description: 根据ID修改权限
@@ -72,12 +64,22 @@ public class PermissionService {
         return permissionMapper.updatePermissionById(permission);
     }
 
+
+
+
+
+
+
+
+
     /**
      * @Title: removePermissionById
      * @Description: 根据ID删除权限
      */
     public int removePermissionById(List ids){
-        return permissionMapper.removePermissionById(ids);
+        int updateCount = permissionMapper.beforeRemovePermissionById(ids);
+        int deleteCount = permissionMapper.removePermissionById(ids);
+        return updateCount+deleteCount;
     }
 
     /**

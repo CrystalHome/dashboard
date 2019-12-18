@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.thymeleaf.model.IModel;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -58,7 +58,6 @@ public class PermissionController {
     @RequestMapping("createPermission")
     @ResponseBody
     public void createPermission(Permission permission){
-        System.out.println(permission);
         permissionService.createPermission(permission);
     }
 
@@ -71,5 +70,23 @@ public class PermissionController {
         Permission permission = permissionService.getPermissionById(id);
         model.addAttribute("permission",permission);
         return "permission/updatePermissionForm";
+    }
+
+    /**
+     * 权限修改
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("updatePermission")
+    public void updatePermission(Permission permission){
+        permissionService.updatePermissionById(permission);
+    }
+
+
+
+    @ResponseBody
+    @RequestMapping("removePermissionById")
+    public void removePermissionById(String id){
+        permissionService.removePermissionById(Arrays.asList(id));
     }
 }

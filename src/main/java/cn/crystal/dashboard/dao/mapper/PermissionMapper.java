@@ -27,6 +27,8 @@ public interface PermissionMapper {
      */
     int updatePermissionById(Permission permission);
 
+    int beforeRemovePermissionById(List ids);
+
     /**
      * @Title: removePermissionById
      * @Description: 根据ID删除权限
@@ -38,6 +40,12 @@ public interface PermissionMapper {
     * @Description: 查询所有权限
     */
     List<Permission> getPermissiones();
+
+   /**
+    * @Title: getRootPermissiones
+    * @Description: 查询所有权限
+    */
+    List<Permission> getRootPermissiones();
 
     /**
      * @Title: getPermissionById

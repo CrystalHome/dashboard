@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="copyright" content="www.crystal-home.cn">
-    <meta http-equiv="cache-control" content="no-store">
-
-    <title>控制台</title>
-
-    <link id="style" rel="stylesheet" type="text/css" href="/jqueryPlugins/jquery-easyui-1.7.0/css/easyui-them-gray.css">
-    <link rel="stylesheet" type="text/css" href="/jqueryPlugins/jquery-easyui-1.7.0/css/icon.css">
-    <link rel="stylesheet" type="text/css" href="/jqueryPlugins/font-awesome-4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="/javascript/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="/jqueryPlugins/jquery-easyui-1.7.0/jquery.easyui.min.js"></script>
-    <script type="text/javascript" src="/jqueryPlugins/jquery-easyui-1.7.0/easyui-lang-zh_CN.js"></script>
-</head>
 <body>
-
+    <style type="text/css">
+        a.action{
+            cursor: pointer;
+        }
+        a.action:hover{
+            color: blueviolet;
+        }
+        a.action:after{
+            content: '|';
+            margin: 5px;
+        }
+        a.action:last-child:after{
+            content: '';
+        }
+    </style>
     <table id="easyUiPermission" />
 
     <script type="text/javascript">
+
         $('#easyUiPermission').treegrid({
             url:'/permission/getPermissionTreeGrid',
             method:'post',
@@ -31,7 +32,7 @@
             checkOnSelect:true,
             treeField:'name',
             checkbox:true,
-            // onlyLeafCheck:true,
+            onlyLeafCheck:true,
             lines:true,
             animate:true,
             columns:[
@@ -39,7 +40,8 @@
                     {field:'name',title:'权限名称',width:80},
                     {title:'唯一标识',field:'id',width:80},
                     {title:'父节点标识',field:'pid',width:80},
-                    {field:'state',title:'折叠状态',width:80,formatter: function(value,row,index){
+                    {field:'state',title:'折叠状态',width:80,
+                        formatter: function(value,row,index){
                             if (value=='open'){
                                 return '展开';
                             }else{
@@ -63,7 +65,13 @@
                         }
                     },
                     {field:'updateTime',title:'更新时间',width:80},
-                    {field:'createTime',title:'创建时间',width:80}
+                    {field:'createTime',title:'创建时间',width:80},
+                    {field:'action',title:'创建时间',width:80,formatter:function(value,row,index){
+                        var actionBtns = [];
+                        actionBtns.push('<a class="action fa fa-edit" onclick="updateDialog('+row.id+')">编辑</a>')
+                        actionBtns.push('<a class="action fa fa-trash-o" onclick="deleteDialog('+row.id+')">删除</a>')
+                        return actionBtns.join('');
+                        }}
                 ]
             ],
             toolbar:[
@@ -75,20 +83,6 @@
                     }
                 },'-',
                 {
-                    text:'修改权限',
-                    iconCls:'icon-lock',
-                    handler:function () {
-                        updateDialog();
-                    }
-                },'-',
-                {
-                    text:'删除权限',
-                    iconCls:'icon-lock',
-                    handler:function () {
-                        alert('删除')
-                    }
-                },'-',
-                {
                     text:'刷新页面',
                     iconCls:'icon-lock',
                     handler:function () {
@@ -97,6 +91,26 @@
                 }
             ]
         });
+
+        function deleteDialog(id) {
+            $.messager.confirm('权限删除', '您确定要删除权限吗？', function(confirm){
+                if (confirm){
+                    $.ajax({
+                        url:'/permission/removePermissionById',
+                        type:'POST',
+                        data:{id:id},
+                        success:function(data){
+                            $.messager.alert('info','权限删除成功！');
+                            $('#easyUiPermission').treegrid('reload');
+                            $('#main_tree').tree('reload');
+                        },
+                        error:function (data) {
+                            $.messager.alert('error','权限删除失败！');
+                        }
+                    });
+                }
+            });
+        }
 
         /**
          * 添加对话框
@@ -143,7 +157,7 @@
                        $.messager.alert('info','权限添加成功！');
                    },
                    error:function (data) {
-                       $.messager.alert('error','权限添失败！');
+                       $.messager.alert('error','权限添加失败！');
                    }
                });
            }
@@ -154,35 +168,30 @@
         /**
          * 修改对话框
          */
-        function updateDialog(){
-            var row = $('#easyUiPermission').treegrid('getSelected');
-            if(row != null){
-                var dialog = $("<div />").dialog({
-                    width : 350,
-                    height : 420,
-                    modal : true,
-                    title:'修改权限',
-                    closable:false,
-                    href:'/permission/updatePermissionForm?id='+row.id,
-                    buttons:[{
-                        text:'保存',
-                        iconCls:'icon-lock',
-                        handler:function(){
-                            updatePermission(dialog);
-                        }
-                    },{
-                        text:'取消',
-                        iconCls:'icon-lock',
-                        handler:function(){
-                            $(dialog).dialog('destroy');
-                            $('#easyUiPermission').treegrid('reload');
-                        }
-                    }]
+        function updateDialog(id){
+            var dialog = $("<div />").dialog({
+                width : 350,
+                height : 420,
+                modal : true,
+                title:'修改权限',
+                closable:false,
+                href:'/permission/updatePermissionForm?id='+id,
+                buttons:[{
+                    text:'保存',
+                    iconCls:'icon-lock',
+                    handler:function(){
+                        updatePermission(dialog);
+                    }
+                },{
+                    text:'取消',
+                    iconCls:'icon-lock',
+                    handler:function(){
+                        $(dialog).dialog('destroy');
+                        $('#easyUiPermission').treegrid('reload');
+                    }
+                }]
 
-                });
-            }else{
-                $.messager.alert('error','请选择要修改的数据！');
-            }
+            });
         }
 
         /**
@@ -198,10 +207,11 @@
                    success:function(data){
                        $(dialog).dialog('destroy');
                        $('#easyUiPermission').treegrid('reload');
-                       $.messager.alert('info','权限添加成功！');
+                       $.messager.alert('info','权限修改成功！');
+                       $('#main_tree').tree('reload');
                    },
                    error:function (data) {
-                       $.messager.alert('error','权限添失败！');
+                       $.messager.alert('error','权限修改失败！');
                    }
                });
            }
