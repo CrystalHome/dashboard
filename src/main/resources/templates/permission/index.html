@@ -78,7 +78,7 @@
                     text:'修改权限',
                     iconCls:'icon-lock',
                     handler:function () {
-                        alert('修改')
+                        updateDialog();
                     }
                 },'-',
                 {
@@ -137,6 +137,64 @@
                    url:'/permission/createPermission',
                    type:'POST',
                    data:$('#createPermissionForm').serialize(),
+                   success:function(data){
+                       $(dialog).dialog('destroy');
+                       $('#easyUiPermission').treegrid('reload');
+                       $.messager.alert('info','权限添加成功！');
+                   },
+                   error:function (data) {
+                       $.messager.alert('error','权限添失败！');
+                   }
+               });
+           }
+        }
+
+
+
+        /**
+         * 修改对话框
+         */
+        function updateDialog(){
+            var row = $('#easyUiPermission').treegrid('getSelected');
+            if(row != null){
+                var dialog = $("<div />").dialog({
+                    width : 350,
+                    height : 420,
+                    modal : true,
+                    title:'修改权限',
+                    closable:false,
+                    href:'/permission/updatePermissionForm?id='+row.id,
+                    buttons:[{
+                        text:'保存',
+                        iconCls:'icon-lock',
+                        handler:function(){
+                            updatePermission(dialog);
+                        }
+                    },{
+                        text:'取消',
+                        iconCls:'icon-lock',
+                        handler:function(){
+                            $(dialog).dialog('destroy');
+                            $('#easyUiPermission').treegrid('reload');
+                        }
+                    }]
+
+                });
+            }else{
+                $.messager.alert('error','请选择要修改的数据！');
+            }
+        }
+
+        /**
+         * 请求后台修改
+         */
+        function updatePermission(dialog){
+           var validateStatus = $('#createPermissionForm').form("validate");
+           if(validateStatus){
+               $.ajax({
+                   url:'/permission/updatePermission',
+                   type:'POST',
+                   data:$('#updatePermissionForm').serialize(),
                    success:function(data){
                        $(dialog).dialog('destroy');
                        $('#easyUiPermission').treegrid('reload');

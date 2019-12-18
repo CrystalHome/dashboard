@@ -46,6 +46,23 @@ public class PermissionService {
     }
 
     /**
+     * @Title: getPermissionById
+     * @Description: 根据ID查询所有权限
+     */
+    public Permission getPermissionById(String id){
+        Permission permission = permissionMapper.getPermissionById(id);
+        return permission;
+    }
+
+
+
+
+
+
+
+
+
+    /**
      * @Title: updatePermissionById
      * @Description: 根据ID修改权限
      */

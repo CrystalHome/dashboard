@@ -24,6 +24,10 @@
         select * from C_TBL_PERMISSION where 1=1
     </select>
 
+    <select id="getPermissionById" resultType="cn.crystal.dashboard.dao.model.Permission">
+        select * from C_TBL_PERMISSION where 1=1 and id=#{id}
+    </select>
+
     <select id="getPermissionesByPid" resultType="cn.crystal.dashboard.dao.model.Permission">
         select * from C_TBL_PERMISSION where 1=1 and PID=#{pid}
     </select>

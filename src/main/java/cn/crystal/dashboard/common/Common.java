@@ -48,7 +48,7 @@ public class Common {
         return easyUiPermissions;
     }
 
-    private static EasyUiPermission convetPermissionTreeGrid(Permission permission){
+    public static EasyUiPermission convetPermissionTreeGrid(Permission permission){
         EasyUiPermission easyUiPermission = new EasyUiPermission();
         easyUiPermission.setId(permission.getId());
         easyUiPermission.setPid(permission.getPid());

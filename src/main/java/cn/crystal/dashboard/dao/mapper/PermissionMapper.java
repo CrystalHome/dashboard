@@ -40,6 +40,12 @@ public interface PermissionMapper {
     List<Permission> getPermissiones();
 
     /**
+     * @Title: getPermissionById
+     * @Description: 根据ID查询所有权限
+     */
+    Permission getPermissionById(String pid);
+
+    /**
      * @Title: getPermissionesByPid
      * @Description: 根据父节点ID查询所有权限
      */

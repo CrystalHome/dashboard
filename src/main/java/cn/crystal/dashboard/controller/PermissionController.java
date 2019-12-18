@@ -5,8 +5,10 @@ import cn.crystal.dashboard.dto.EasyUiPermission;
 import cn.crystal.dashboard.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.thymeleaf.model.IModel;
 
 import java.util.List;
 
@@ -49,7 +51,7 @@ public class PermissionController {
      * @return
      */
     @RequestMapping("createPermissionForm")
-    public String createPermissionPage(){
+    public String createPermissionForm(){
         return "permission/createPermissionForm";
     }
 
@@ -60,5 +62,14 @@ public class PermissionController {
         permissionService.createPermission(permission);
     }
 
-
+    /**
+     * 权限修改页面
+     * @return
+     */
+    @RequestMapping("updatePermissionForm")
+    public String updatePermissionForm(Model model, String id){
+        Permission permission = permissionService.getPermissionById(id);
+        model.addAttribute("permission",permission);
+        return "permission/updatePermissionForm";
+    }
 }
