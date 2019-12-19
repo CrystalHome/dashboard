@@ -40,14 +40,6 @@
                     {field:'name',title:'权限名称',width:80},
                     {title:'唯一标识',field:'id',width:80},
                     {title:'父节点标识',field:'pid',width:80},
-                    {field:'state',title:'折叠状态',width:80,
-                        formatter: function(value,row,index){
-                            if (value=='open'){
-                                return '展开';
-                            }else{
-                                return '折叠';
-                            }
-                        }},
                     {field:'actionUrl',title:'事件地址',width:80},
                     {field:'iconCls',title:'图标样式',width:80},
                     {field:'status',title:'记录状态',width:80,
@@ -66,7 +58,7 @@
                     },
                     {field:'updateTime',title:'更新时间',width:80},
                     {field:'createTime',title:'创建时间',width:80},
-                    {field:'action',title:'创建时间',width:80,formatter:function(value,row,index){
+                    {field:'action',title:'管理',width:80,formatter:function(value,row,index){
                         var actionBtns = [];
                         actionBtns.push('<a class="action fa fa-edit" onclick="updateDialog('+row.id+')">编辑</a>')
                         actionBtns.push('<a class="action fa fa-trash-o" onclick="deleteDialog('+row.id+')">删除</a>')
@@ -118,7 +110,7 @@
         function createDialog(){
             var dialog = $("<div />").dialog({
                 width : 350,
-                height : 420,
+                height : 370,
                 modal : true,
                 title:'添加权限',
                 closable:false,
@@ -163,15 +155,13 @@
            }
         }
 
-
-
         /**
          * 修改对话框
          */
         function updateDialog(id){
             var dialog = $("<div />").dialog({
                 width : 350,
-                height : 420,
+                height : 370,
                 modal : true,
                 title:'修改权限',
                 closable:false,

@@ -1,7 +1,6 @@
 package cn.crystal.dashboard.service;
 
-import cn.crystal.dashboard.common.Common;
-import cn.crystal.dashboard.config.Config;
+import cn.crystal.dashboard.common.PermissionCommon;
 import cn.crystal.dashboard.dao.mapper.PermissionMapper;
 import cn.crystal.dashboard.dao.model.Permission;
 import cn.crystal.dashboard.dto.EasyUiPermission;
@@ -30,7 +29,7 @@ public class PermissionService {
      */
     public List<EasyUiPermission> getPermissionTreeGrid(){
         List<Permission> permissions = permissionMapper.getPermissiones();
-        List<EasyUiPermission> result = Common.parsePermissionTreeGrid(permissions);
+        List<EasyUiPermission> result = PermissionCommon.parsePermissionTreeGrid(permissions);
         return result;
     }
 

@@ -5,8 +5,8 @@
 <mapper namespace="cn.crystal.dashboard.dao.mapper.PermissionMapper">
 
     <insert id="createPermission" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="cn.crystal.dashboard.dao.model.Permission">
-        INSERT INTO C_TBL_PERMISSION (PID, NAME, OPEN_STATUS, ACTION_URL, ICON, STATUS, CREATE_TIME, UPDATE_TIME)
-        VALUES (#{pid}, #{name}, #{openStatus}, #{actionUrl}, #{icon}, #{status}, #{createTime}, #{updateTime})
+        INSERT INTO C_TBL_PERMISSION (PID, NAME, ACTION_URL, ICON, STATUS, CREATE_TIME, UPDATE_TIME)
+        VALUES (#{pid}, #{name}, #{actionUrl}, #{icon}, #{status}, #{createTime}, #{updateTime})
     </insert>
 
     <update id="beforeRemovePermissionById" parameterType="java.util.List">
@@ -24,7 +24,7 @@
     </delete>
 
     <update id="updatePermissionById" parameterType="cn.crystal.dashboard.dao.model.Permission">
-        update C_TBL_PERMISSION set PID=#{pid},NAME=#{name},OPEN_STATUS=#{openStatus},ACTION_URL=#{actionUrl},ICON=#{icon},STATUS=#{status},UPDATE_TIME=#{updateTime} where ID=#{id}
+        update C_TBL_PERMISSION set PID=#{pid},NAME=#{name},ACTION_URL=#{actionUrl},ICON=#{icon},STATUS=#{status},UPDATE_TIME=#{updateTime} where ID=#{id}
     </update>
 
     <select id="getPermissiones" resultType="cn.crystal.dashboard.dao.model.Permission">

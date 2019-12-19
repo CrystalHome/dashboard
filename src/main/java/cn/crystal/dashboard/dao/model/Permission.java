@@ -1,5 +1,7 @@
 package cn.crystal.dashboard.dao.model;
 
+import java.util.StringJoiner;
+
 /**
  * @author Crystal-Chen
  * @Title: Permission
@@ -14,8 +16,6 @@ public class Permission {
     private String pid="0";
 
     private String name;
-
-    private String openStatus="0";
 
     private String actionUrl;
 
@@ -49,14 +49,6 @@ public class Permission {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getOpenStatus() {
-        return openStatus;
-    }
-
-    public void setOpenStatus(String openStatus) {
-        this.openStatus = openStatus;
     }
 
     public String getActionUrl() {
@@ -98,20 +90,17 @@ public class Permission {
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
-
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Permission{");
-        sb.append("id='").append(id).append('\'');
-        sb.append(", pid='").append(pid).append('\'');
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", openStatus='").append(openStatus).append('\'');
-        sb.append(", actionUrl='").append(actionUrl).append('\'');
-        sb.append(", icon='").append(icon).append('\'');
-        sb.append(", status='").append(status).append('\'');
-        sb.append(", createTime='").append(createTime).append('\'');
-        sb.append(", updateTime='").append(updateTime).append('\'');
-        sb.append('}');
-        return sb.toString();
+        return new StringJoiner(", ", Permission.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("pid='" + pid + "'")
+                .add("name='" + name + "'")
+                .add("actionUrl='" + actionUrl + "'")
+                .add("icon='" + icon + "'")
+                .add("status='" + status + "'")
+                .add("createTime='" + createTime + "'")
+                .add("updateTime='" + updateTime + "'")
+                .toString();
     }
 }

@@ -1,10 +1,8 @@
 package cn.crystal.dashboard.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 /**
  * @author Crystal-Chen
@@ -91,11 +89,7 @@ public class EasyUiPermission {
     }
 
     public void setState(String state) {
-        this.state = "open";
-
-        if(StringUtils.equals("0",state)){
-            this.state = "closed";
-        }
+        this.state=state;
     }
 
     public String getStatus() {
@@ -140,20 +134,19 @@ public class EasyUiPermission {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("EasyUiPermission{");
-        sb.append("id='").append(id).append('\'');
-        sb.append(", pid='").append(pid).append('\'');
-        sb.append(", name='").append(name).append('\'');
-        sb.append(", actionUrl='").append(actionUrl).append('\'');
-        sb.append(", iconCls='").append(iconCls).append('\'');
-        sb.append(", text='").append(text).append('\'');
-        sb.append(", state='").append(state).append('\'');
-        sb.append(", status='").append(status).append('\'');
-        sb.append(", createTime='").append(createTime).append('\'');
-        sb.append(", updateTime='").append(updateTime).append('\'');
-        sb.append(", children=").append(children);
-        sb.append(", attributes=").append(attributes);
-        sb.append('}');
-        return sb.toString();
+        return new StringJoiner(", ", EasyUiPermission.class.getSimpleName() + "[", "]")
+                .add("id='" + id + "'")
+                .add("pid='" + pid + "'")
+                .add("name='" + name + "'")
+                .add("actionUrl='" + actionUrl + "'")
+                .add("iconCls='" + iconCls + "'")
+                .add("text='" + text + "'")
+                .add("state='" + state + "'")
+                .add("status='" + status + "'")
+                .add("createTime='" + createTime + "'")
+                .add("updateTime='" + updateTime + "'")
+                .add("children=" + children)
+                .add("attributes=" + attributes)
+                .toString();
     }
 }
