@@ -38,4 +38,9 @@ public class IndexController {
         List<EasyUiPermission> easyUiPermissions = permissionService.getPermissiones(PermissionSearchType.MENU);
         return easyUiPermissions;
     }
+
+    @RequestMapping("defaultAction")
+    public String defaultAction(){
+        return "default";
+    }
 }
