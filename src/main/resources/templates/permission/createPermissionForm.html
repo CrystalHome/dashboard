@@ -42,7 +42,7 @@
 
 <script type="text/javascript">
     $.ajax({
-        url:'/permission/getPermissionTreeGrid',
+        url:'/permission/getPermissiones/do',
         type:'POST',
         success:function(data){
             var pid = 0;
@@ -56,26 +56,14 @@
             })
         },
         error:function (data) {
-            $.messager.alert('error','父节点信息获取失败！');
+            $.messager.alert('error','权限信息获取失败！');
         }
     });
 
-    $('#openStatusSwitch').switchbutton({
-        checked: true,
-        onText:'展开',
-        offText:'折叠',
-        onChange:function(checked){
-            if(checked){
-                $('#openStatus').val('1');
-            }else{
-                $('#openStatus').val('0');
-            }
-        }
-    })
     $('#statusSwitch').switchbutton({
         checked: true,
-        onText:'展开',
-        offText:'折叠',
+        onText:'启用',
+        offText:'禁用',
         onChange:function(checked){
             if(checked){
                 $('#status').val('1');

@@ -1,40 +1,57 @@
-package cn.crystal.dashboard.dto;
+package cn.crystal.dashboard.base.model;
 
-import java.util.List;
-import java.util.Map;
+import javax.persistence.Table;
 import java.util.StringJoiner;
 
 /**
  * @author Crystal-Chen
- * @Title: EasyUiPermission
- * @Package cn.crystal.dashboard.dto
- * @Description:
- * @date 2019/12/14 21:16
+ * @Title: Permission
+ * @Package cn.crystal.dashboard.dao.model
+ * @Description: 权限实体类
+ * @date 2019/12/9 0:25
  */
-public class EasyUiPermission {
+@Table(name = "c_tbl_permission")
+public class Permission {
+
+    /**
+    * @Description: ID
+    */
     private String id;
 
-    private String pid;
+    /**
+     * @Description: 父ID
+     */
+    private String pid="0";
 
+    /**
+     * @Description: 节点名
+     */
     private String name;
 
+    /**
+     * @Description: 资源地址
+     */
     private String actionUrl;
 
-    private String iconCls;
+    /**
+    * @Description: 图标样式
+    */
+    private String icon;
 
-    private String text;
+    /**
+    * @Description: 记录状态
+    */
+    private String status="1";
 
-    private String state;
-
-    private String status;
-
+    /**
+    * @Description: 创建时间,格式:yyyy-MM-dd HH:mm:ss
+    */
     private String createTime;
 
+    /**
+    * @Description: 更新时间,格式:yyyy-MM-dd HH:mm:ss
+    */
     private String updateTime;
-
-    private List<EasyUiPermission> children;
-
-    private Map<String,String> attributes;
 
     public String getId() {
         return id;
@@ -68,28 +85,12 @@ public class EasyUiPermission {
         this.actionUrl = actionUrl;
     }
 
-    public String getIconCls() {
-        return iconCls;
+    public String getIcon() {
+        return icon;
     }
 
-    public void setIconCls(String iconCls) {
-        this.iconCls = iconCls;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state=state;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
     public String getStatus() {
@@ -115,38 +116,17 @@ public class EasyUiPermission {
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
-
-    public List<EasyUiPermission> getChildren() {
-        return children;
-    }
-
-    public void setChildren(List<EasyUiPermission> children) {
-        this.children = children;
-    }
-
-    public Map<String, String> getAttributes() {
-        return attributes;
-    }
-
-    public void setAttributes(Map<String, String> attributes) {
-        this.attributes = attributes;
-    }
-
     @Override
     public String toString() {
-        return new StringJoiner(", ", EasyUiPermission.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", Permission.class.getSimpleName() + "[", "]")
                 .add("id='" + id + "'")
                 .add("pid='" + pid + "'")
                 .add("name='" + name + "'")
                 .add("actionUrl='" + actionUrl + "'")
-                .add("iconCls='" + iconCls + "'")
-                .add("text='" + text + "'")
-                .add("state='" + state + "'")
+                .add("icon='" + icon + "'")
                 .add("status='" + status + "'")
                 .add("createTime='" + createTime + "'")
                 .add("updateTime='" + updateTime + "'")
-                .add("children=" + children)
-                .add("attributes=" + attributes)
                 .toString();
     }
 }

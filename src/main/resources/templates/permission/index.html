@@ -21,7 +21,7 @@
     <script type="text/javascript">
 
         $('#easyUiPermission').treegrid({
-            url:'/permission/getPermissionTreeGrid',
+            url:'/permission/getPermissiones',
             method:'post',
             loadMsg:'正在加载',
             idField:'id',
@@ -40,9 +40,11 @@
                     {field:'name',title:'权限名称',width:80},
                     {title:'唯一标识',field:'id',width:80},
                     {title:'父节点标识',field:'pid',width:80},
-                    {field:'actionUrl',title:'事件地址',width:80},
-                    {field:'iconCls',title:'图标样式',width:80},
-                    {field:'status',title:'记录状态',width:80,
+                    {field:'actionUrl',title:'资源地址',width:80},
+                    {field:'iconCls',title:'图标样式',width:80,formatter:function(value,row,index){
+                            return value;
+                        }},
+                    {field:'status',title:'权限状态',width:80,
                         formatter: function(value,row,index){
                             if (value=='0'){
                                 return '禁用';
@@ -50,9 +52,11 @@
                                 return '启用';
                             }
                         },
-                        styler:function(value,row,index){
+                        styler: function (value,row,index) {
                             if (value=='0'){
-                                return 'color:red;';
+                                return 'color:red;font-weight:bold;';
+                            }else{
+                                return 'color:green;font-weight:bold;';
                             }
                         }
                     },
@@ -88,11 +92,10 @@
             $.messager.confirm('权限删除', '您确定要删除权限吗？', function(confirm){
                 if (confirm){
                     $.ajax({
-                        url:'/permission/removePermissionById',
+                        url:'/permission/removePermissionById/'+id,
                         type:'POST',
-                        data:{id:id},
                         success:function(data){
-                            $.messager.alert('成功','权限删除成功！','info');
+                       //     $.messager.alert('成功','权限删除成功！','info');
                             $('#easyUiPermission').treegrid('reload');
                             $('#main_tree').tree('reload');
                         },
@@ -126,7 +129,6 @@
                     iconCls:'icon-lock',
                     handler:function(){
                         $(dialog).dialog('destroy');
-                        $('#easyUiPermission').treegrid('reload');
                     }
                 }]
 
@@ -146,7 +148,7 @@
                    success:function(data){
                        $(dialog).dialog('destroy');
                        $('#easyUiPermission').treegrid('reload');
-                       $.messager.alert('成功','权限添加成功！','info');
+                     //  $.messager.alert('成功','权限添加成功！','info');
                    },
                    error:function (data) {
                        $.messager.alert('错误','权限添加失败！','error');
@@ -165,7 +167,7 @@
                 modal : true,
                 title:'修改权限',
                 closable:false,
-                href:'/permission/updatePermissionForm?id='+id,
+                href:'/permission/updatePermissionForm/'+id,
                 buttons:[{
                     text:'保存',
                     iconCls:'icon-lock',
@@ -177,7 +179,6 @@
                     iconCls:'icon-lock',
                     handler:function(){
                         $(dialog).dialog('destroy');
-                        $('#easyUiPermission').treegrid('reload');
                     }
                 }]
 
@@ -197,7 +198,7 @@
                    success:function(data){
                        $(dialog).dialog('destroy');
                        $('#easyUiPermission').treegrid('reload');
-                       $.messager.alert('成功','权限修改成功！','info');
+                    //   $.messager.alert('成功','权限修改成功！','info');
                        $('#main_tree').tree('reload');
                    },
                    error:function (data) {

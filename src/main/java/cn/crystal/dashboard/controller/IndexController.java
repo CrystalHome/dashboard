@@ -1,7 +1,8 @@
 package cn.crystal.dashboard.controller;
 
-import cn.crystal.dashboard.dto.EasyUiPermission;
-import cn.crystal.dashboard.service.PermissionService;
+import cn.crystal.dashboard.common.PermissionSearchType;
+import cn.crystal.dashboard.controller.webmodel.EasyUiPermission;
+import cn.crystal.dashboard.service.permission.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +35,7 @@ public class IndexController {
     @ResponseBody
     @RequestMapping("initEasyUiTree")
     public List<EasyUiPermission> initEasyUiTree(){
-        List<EasyUiPermission> easyUiPermissions = permissionService.getPermissionTreeGrid();
+        List<EasyUiPermission> easyUiPermissions = permissionService.getPermissiones(PermissionSearchType.MENU);
         return easyUiPermissions;
     }
 }

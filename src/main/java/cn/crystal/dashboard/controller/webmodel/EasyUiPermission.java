@@ -1,31 +1,40 @@
-package cn.crystal.dashboard.dao.model;
+package cn.crystal.dashboard.controller.webmodel;
 
+import java.util.List;
+import java.util.Map;
 import java.util.StringJoiner;
 
 /**
  * @author Crystal-Chen
- * @Title: Permission
- * @Package cn.crystal.dashboard.dao.model
+ * @Title: EasyUiPermission
+ * @Package cn.crystal.dashboard.webmodel
  * @Description:
- * @date 2019/12/9 0:25
+ * @date 2019/12/14 21:16
  */
-public class Permission {
-
+public class EasyUiPermission {
     private String id;
 
-    private String pid="0";
+    private String pid;
 
     private String name;
 
     private String actionUrl;
 
-    private String icon;
+    private String iconCls;
 
-    private String status="1";
+    private String text;
+
+    private String state;
+
+    private String status;
 
     private String createTime;
 
     private String updateTime;
+
+    private List<EasyUiPermission> children;
+
+    private Map<String,String> attributes;
 
     public String getId() {
         return id;
@@ -59,12 +68,28 @@ public class Permission {
         this.actionUrl = actionUrl;
     }
 
-    public String getIcon() {
-        return icon;
+    public String getIconCls() {
+        return iconCls;
     }
 
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setIconCls(String iconCls) {
+        this.iconCls = iconCls;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state=state;
     }
 
     public String getStatus() {
@@ -90,17 +115,38 @@ public class Permission {
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
+
+    public List<EasyUiPermission> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<EasyUiPermission> children) {
+        this.children = children;
+    }
+
+    public Map<String, String> getAttributes() {
+        return attributes;
+    }
+
+    public void setAttributes(Map<String, String> attributes) {
+        this.attributes = attributes;
+    }
+
     @Override
     public String toString() {
-        return new StringJoiner(", ", Permission.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", EasyUiPermission.class.getSimpleName() + "[", "]")
                 .add("id='" + id + "'")
                 .add("pid='" + pid + "'")
                 .add("name='" + name + "'")
                 .add("actionUrl='" + actionUrl + "'")
-                .add("icon='" + icon + "'")
+                .add("iconCls='" + iconCls + "'")
+                .add("text='" + text + "'")
+                .add("state='" + state + "'")
                 .add("status='" + status + "'")
                 .add("createTime='" + createTime + "'")
                 .add("updateTime='" + updateTime + "'")
+                .add("children=" + children)
+                .add("attributes=" + attributes)
                 .toString();
     }
 }

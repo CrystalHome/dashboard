@@ -2,44 +2,35 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="cn.crystal.dashboard.dao.mapper.PermissionMapper">
+<mapper namespace="cn.crystal.dashboard.base.mapper.PermissionMapper">
 
-    <insert id="createPermission" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="cn.crystal.dashboard.dao.model.Permission">
+    <!--添加权限-->
+    <insert id="createPermission" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="cn.crystal.dashboard.base.model.Permission">
         INSERT INTO C_TBL_PERMISSION (PID, NAME, ACTION_URL, ICON, STATUS, CREATE_TIME, UPDATE_TIME)
         VALUES (#{pid}, #{name}, #{actionUrl}, #{icon}, #{status}, #{createTime}, #{updateTime})
     </insert>
 
-    <update id="beforeRemovePermissionById" parameterType="java.util.List">
-        update C_TBL_PERMISSION set pid=0  where 1>2 or pid in
-        <foreach collection="list" item="id" open="(" separator="," close=")">
-          #{id}
-        </foreach>
-    </update>
-
-    <delete id="removePermissionById" parameterType="java.util.List">
-        delete from C_TBL_PERMISSION where 1>2 or id in
-        <foreach collection="list" item="id" open="(" separator="," close=")">
-          #{id}
-        </foreach>
-    </delete>
-
-    <update id="updatePermissionById" parameterType="cn.crystal.dashboard.dao.model.Permission">
+    <!--根据ID修改权限-->
+    <update id="updatePermissionById" parameterType="cn.crystal.dashboard.base.model.Permission">
         update C_TBL_PERMISSION set PID=#{pid},NAME=#{name},ACTION_URL=#{actionUrl},ICON=#{icon},STATUS=#{status},UPDATE_TIME=#{updateTime} where ID=#{id}
     </update>
 
-    <select id="getPermissiones" resultType="cn.crystal.dashboard.dao.model.Permission">
+    <!--根据ID删除权限-->
+    <delete id="removePermissionById" parameterType="java.util.List">
+        delete from C_TBL_PERMISSION where 1>2 or id in
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <!--查询所有权限-->
+    <select id="getPermissiones" resultType="cn.crystal.dashboard.base.model.Permission">
         select * from C_TBL_PERMISSION where 1=1 
     </select>
 
-    <select id="getRootPermissiones" resultType="cn.crystal.dashboard.dao.model.Permission">
-        select * from C_TBL_PERMISSION where 1=1 and pid=0 
-    </select>
-
-    <select id="getPermissionById" resultType="cn.crystal.dashboard.dao.model.Permission">
+    <!--根据ID查询权限-->
+    <select id="getPermissionById" resultType="cn.crystal.dashboard.base.model.Permission">
         select * from C_TBL_PERMISSION where 1=1 and id=#{id} 
     </select>
 
-    <select id="getPermissionesByPid" resultType="cn.crystal.dashboard.dao.model.Permission">
-        select * from C_TBL_PERMISSION where 1=1 and PID=#{pid} 
-    </select>
 </mapper>

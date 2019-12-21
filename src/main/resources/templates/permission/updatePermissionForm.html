@@ -19,7 +19,7 @@
     <input type="hidden" id="id" name="id" th:value="${permission.id}">
     <div class='form-line'>
         <label for='pid'>父级节点</label>
-        <select id="pid" name='pid' class="easyui-combotree" data-options="required:true">
+        <select id="pid" name='pid' class="easyui-combotree" th:data-options="'required:true,value:'+${permission.pid}">
         </select>
     </div>
     <div class='form-line'>
@@ -36,47 +36,32 @@
     </div>
     <div class='form-line'>
         <label for='status'>权限状态</label>
-        <input type="hidden" id="status" name="status" th:value="${permission.status}">
-        <input id='statusSwitch' style="width: 200px;">
+        <input type="hidden" id="status" name="status" th:value="${permission.status}" >
+        <input id='statusSwitch' style="width: 200px;" th:data-options="'checked:'+${permission.status=='1'}">
     </div>
 </form>
 
 <script type="text/javascript">
     $.ajax({
-        url:'/permission/getPermissionTreeGrid',
+        url:'/permission/getPermissiones/do',
         type:'POST',
         success:function(data){
-            var pid = 0;
             if(data.length > 0){
                 pid = data[0].id;
             }
             $("#pid").combotree({
                 data:data,
-                textField:'name',
-                value:pid
+                textField:'name'
             })
         },
         error:function (data) {
-            $.messager.alert('error','父节点信息获取失败！');
+            $.messager.alert('error','权限信息获取失败！');
         }
     });
 
-    $('#openStatusSwitch').switchbutton({
-        checked: true,
-        onText:'展开',
-        offText:'折叠',
-        onChange:function(checked){
-            if(checked){
-                $('#openStatus').val('1');
-            }else{
-                $('#openStatus').val('0');
-            }
-        }
-    })
     $('#statusSwitch').switchbutton({
-        checked: true,
-        onText:'展开',
-        offText:'折叠',
+        onText:'启用',
+        offText:'禁用',
         onChange:function(checked){
             if(checked){
                 $('#status').val('1');
