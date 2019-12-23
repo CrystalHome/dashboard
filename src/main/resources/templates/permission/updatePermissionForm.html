@@ -37,7 +37,7 @@
     <div class='form-line'>
         <label for='status'>权限状态</label>
         <input type="hidden" id="status" name="status" th:value="${permission.status}" >
-        <input id='statusSwitch' style="width: 200px;" th:data-options="'checked:'+${permission.status=='1'}">
+        <input id='statusSwitch' style="width: 80px;" th:data-options="'checked:'+${permission.status=='1'}">
     </div>
 </form>
 
