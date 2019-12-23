@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <style type="text/css">
+        a.action{
+            cursor: pointer;
+        }
+        a.action:hover{
+            color: blueviolet;
+        }
+        a.action:after{
+            content: '|';
+            margin: 5px;
+        }
+        a.action:last-child:after{
+            content: '';
+        }
+    </style>
+    <div class="easyui-layout" data-options="fit:true">
+        <div data-options="border:false, showHeader:false, split:true, collapsible:false, region:'center'">
+            <table id="roleDatagrid" ></table>
+        </div>
+        <div data-options="border:true, split:false, iconCls:'icon-lock', collapsible:false, region:'east',title:'权限'" style="width:300px;">
+            aaa
+        </div>
+    </div>
+    <script type="text/javascript">
+
+        $('#roleDatagrid').datagrid({
+            url:'/role/getRolees',
+            method:'post',
+            loadMsg:'正在加载',
+            idField:'id',
+            fit:true,
+            fitColumns:true,
+            singleSelect:true,
+            rownumbers:true,
+            striped:true,
+            lines:true,
+            columns:[
+                [
+                    {field:'name',title:'角色名称',width:80},
+                    {field:'id',title:'唯一标识',width:80},
+                    {field:'comments',title:'角色说明',width:80},
+                    {field:'status',title:'角色状态',width:80,
+                        formatter: function(value,row,index){
+                            if (value=='0'){
+                                return '禁用';
+                            }else{
+                                return '启用';
+                            }
+                        },
+                        styler: function (value,row,index) {
+                            if (value=='0'){
+                                return 'color:red;font-weight:bold;';
+                            }else{
+                                return 'color:green;font-weight:bold;';
+                            }
+                        }
+                    },
+                    {field:'updateTime',title:'更新时间',width:80},
+                    {field:'createTime',title:'创建时间',width:80},
+                    {field:'action',title:'管理',width:80,formatter:function(value,row,index){
+                            var actionBtns = [];
+                            actionBtns.push('<a class="action fa fa-edit" onclick="updateDialog('+row.id+')">编辑</a>')
+                            actionBtns.push('<a class="action fa fa-trash-o" onclick="deleteDialog('+row.id+')">删除</a>')
+                            return actionBtns.join('');
+                        }}
+                ]
+            ],
+            toolbar:[
+                {
+                    text:'添加角色',
+                    iconCls:'icon-add',
+                    handler:function () {
+                        createDialog();
+                    }
+                },'-',
+                {
+                    text:'刷新页面',
+                    iconCls:'icon-reload',
+                    handler:function () {
+                        $('#roleDatagrid').datagrid('reload');
+                    }
+                }
+            ]
+        });
+    </script>
+</body>
+</html>

@@ -17,6 +17,14 @@
 
     <script type="text/javascript" th:src="@{/jqueryPlugins/bootstrap4/js/bootstrap.min.js}"></script>
 
+    <style type="text/css">
+        #footerDiv{
+            width: 100%;
+            height:20px;
+            text-align: center;
+            line-height: 20px;
+        }
+    </style>
 </head>
 <body class="easyui-layout">
 
@@ -34,13 +42,28 @@
     </div>
 
     <!-- 左侧区域 -->
-    <div data-options="border:false, split:true, iconCls:'icon-search', collapsible:false, region:'west',title:'West'" style="width:200px;">
+    <div data-options="border:true, split:false, iconCls:'icon-lock', collapsible:false, region:'west',title:'功能菜单'" style="width:200px;">
         <ul id="main_tree" class="easyui-tree" data-options="animate:true, lines:false, url:'/initEasyUiTree',method:'post'"></ul>
     </div>
 
     <!-- 中部内容区 -->
-    <div data-options="border:false, fit:false, showHeader:true, split:true, collapsible:false, region:'center', href:'/defaultAction', title:'操作区'">
+    <!--<div data-options="border:false, fit:false, showHeader:true, split:true, collapsible:false, region:'center', href:'/defaultAction', title:'操作区'">-->
+    <div data-options="border:false, showHeader:false, split:false, collapsible:false, region:'center'">
+        <div id="centerTabs" class="easyui-tabs" data-options="fit:true,border:false, tabWidth:'120', iconCls:'icon-lock'">
+            <div id="centerTabs_default" title="主页" href="/defaultAction"></div>
+            <!--
+             <div id="centerTabs_default" title="主页">
+                 <iframe src="${cbp}/components/default_center.jsp" width="100%" height="100%" scrolling="auto" style="border: none;"></iframe>
+             </div>
+             -->
+        </div>
+    </div>
 
+    <!-- 底部内容区 -->
+    <div data-options="border:true, split:false, collapsible:false, region:'south', height:20">
+        <div id="footerDiv">
+            &copy;Copyright  2019 <a href="http://www.crystal-home.cn" style="color: #000000;">www.crystal-home.cn</a> 鲁ICP备18004494号
+        </div>
     </div>
 </body>
 
@@ -114,7 +137,21 @@
         var nodeChildrens=$(tree).tree('getChildren',node.target);
         if(nodeChildrens.length == 0){
             var url = node.attributes.url;
-            $("body").layout('panel','center').panel('refresh',url).panel('setTitle',node.text);
+       //     $("body").layout('panel','center').panel('refresh',url).panel('setTitle',node.text);
+
+            var tabExists = $("#centerTabs").tabs('exists',node.text);
+            if(tabExists){
+                $("#centerTabs").tabs('select',node.text);
+            }else{
+                $("#centerTabs").tabs('add',{
+                    title:node.text,
+                    fit:true,
+                    selected:true,
+                    href:url,
+                    iconCls:node.iconCls,
+                    closable:true
+                });
+            }
         }
     }
 </script>

@@ -15,7 +15,7 @@ import java.util.List;
  * @author Crystal-Chen
  * @Title: PermissionService
  * @Package cn.crystal.dashboard.service
- * @Description:
+ * @Description: 权限操作业务类
  * @date 2019/12/9 23:23
  */
 @Service

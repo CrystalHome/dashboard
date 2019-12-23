@@ -5,52 +5,41 @@ import java.util.StringJoiner;
 
 /**
  * @author Crystal-Chen
- * @Title: Permission
- * @Package cn.crystal.dashboard.dao.model
- * @Description: 权限实体类
- * @date 2019/12/9 0:25
+ * @Title: Role
+ * @Package cn.crystal.dashboard.base.model
+ * @Description: 角色实体类
+ * @date 2019/12/23 20:39
  */
-@Table(name = "c_tbl_permission")
-public class Permission {
-
+@Table(name = "c_tbl_role")
+public class Role {
     /**
-    * @Description: ID
-    */
+     * @Description: ID
+     */
     private String id;
 
     /**
-     * @Description: 父ID
-     */
-    private String pid="0";
-
-    /**
-     * @Description: 权限名称
+     * @Description: 角色名称
      */
     private String name;
 
     /**
-     * @Description: 资源地址
+     * @Description: 角色说明
      */
-    private String actionUrl;
+    private String comments;
 
     /**
-    * @Description: 图标样式
-    */
-    private String icon;
-
-    /**
-    * @Description: 记录状态
-    */
+     * @Description: 记录状态
+     */
     private String status="1";
 
     /**
-    * @Description: 创建时间,格式:yyyy-MM-dd HH:mm:ss
-    */
+     * @Description: 创建时间,格式:yyyy-MM-dd HH:mm:ss
+     */
     private String createTime;
 
     /**
-    * @Description: 更新时间,格式:yyyy-MM-dd HH:mm:ss
-    */
+     * @Description: 更新时间,格式:yyyy-MM-dd HH:mm:ss
+     */
     private String updateTime;
 
     public String getId() {
@@ -61,14 +50,6 @@ public class Permission {
         this.id = id;
     }
 
-    public String getPid() {
-        return pid;
-    }
-
-    public void setPid(String pid) {
-        this.pid = pid;
-    }
-
     public String getName() {
         return name;
     }
@@ -77,20 +58,12 @@ public class Permission {
         this.name = name;
     }
 
-    public String getActionUrl() {
-        return actionUrl;
+    public String getComments() {
+        return comments;
     }
 
-    public void setActionUrl(String actionUrl) {
-        this.actionUrl = actionUrl;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 
     public String getStatus() {
@@ -116,14 +89,13 @@ public class Permission {
     public void setUpdateTime(String updateTime) {
         this.updateTime = updateTime;
     }
+
     @Override
     public String toString() {
-        return new StringJoiner(", ", Permission.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", Role.class.getSimpleName() + "[", "]")
                 .add("id='" + id + "'")
-                .add("pid='" + pid + "'")
                 .add("name='" + name + "'")
-                .add("actionUrl='" + actionUrl + "'")
-                .add("icon='" + icon + "'")
+                .add("comments='" + comments + "'")
                 .add("status='" + status + "'")
                 .add("createTime='" + createTime + "'")
                 .add("updateTime='" + updateTime + "'")

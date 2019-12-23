@@ -16,11 +16,12 @@
             content: '';
         }
     </style>
-    <table id="easyUiPermission" />
+
+    <table id="permissionDatagrid" />
 
     <script type="text/javascript">
 
-        $('#easyUiPermission').treegrid({
+        $('#permissionDatagrid').treegrid({
             url:'/permission/getPermissiones',
             method:'post',
             loadMsg:'正在加载',
@@ -38,7 +39,7 @@
             columns:[
                 [
                     {field:'name',title:'权限名称',width:80},
-                    {title:'唯一标识',field:'id',width:80},
+                    {field:'id',title:'唯一标识',width:80},
                     {title:'父节点标识',field:'pid',width:80},
                     {field:'actionUrl',title:'资源地址',width:80},
                     {field:'iconCls',title:'图标样式',width:80,formatter:function(value,row,index){
@@ -82,7 +83,7 @@
                     text:'刷新页面',
                     iconCls:'icon-lock',
                     handler:function () {
-                        $('#easyUiPermission').treegrid('reload');
+                        $('#permissionDatagrid').treegrid('reload');
                     }
                 }
             ]
@@ -96,7 +97,7 @@
                         type:'POST',
                         success:function(data){
                        //     $.messager.alert('成功','权限删除成功！','info');
-                            $('#easyUiPermission').treegrid('reload');
+                            $('#permissionDatagrid').treegrid('reload');
                             $('#main_tree').tree('reload');
                         },
                         error:function (data) {
@@ -147,7 +148,7 @@
                    data:$('#createPermissionForm').serialize(),
                    success:function(data){
                        $(dialog).dialog('destroy');
-                       $('#easyUiPermission').treegrid('reload');
+                       $('#permissionDatagrid').treegrid('reload');
                      //  $.messager.alert('成功','权限添加成功！','info');
                    },
                    error:function (data) {
@@ -197,7 +198,7 @@
                    data:$('#updatePermissionForm').serialize(),
                    success:function(data){
                        $(dialog).dialog('destroy');
-                       $('#easyUiPermission').treegrid('reload');
+                       $('#permissionDatagrid').treegrid('reload');
                     //   $.messager.alert('成功','权限修改成功！','info');
                        $('#main_tree').tree('reload');
                    },
