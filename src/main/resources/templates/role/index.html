@@ -24,6 +24,7 @@
             <ul id="rolePermissionTree"></ul>
         </div>
     </div>
+
     <script type="text/javascript">
 
         $('#roleDatagrid').datagrid({
@@ -211,12 +212,50 @@
          * 加载角色权限
          */
         function onSelectRoleRow(row) {
+            var options = $("#rolePermissionArea").panel('options');
+            options.tools=[];
+            $("#rolePermissionArea").panel(options);
             $("#rolePermissionArea").panel('setTitle','['+row.name+']权限修改');
             $('#rolePermissionTree').tree({
                 url:'/role/getRolePermissionById/'+row.id,
                 method:'post',
                 checkbox:true,
-                lines:true
+                lines:true,
+                onCheck:function (node, checked) {
+                    var options = $("#rolePermissionArea").panel('options');
+                    options.tools=[{
+                                        iconCls:'icon-lock',
+                                        handler:function(){
+                                            updateRolePermission();
+                                        }
+                                    }
+                                ]
+                    $("#rolePermissionArea").panel(options);
+                }
+            });
+        }
+
+        /**
+         * 修改角色权限
+         */
+        function updateRolePermission(){
+            var idArray = [];
+            var checkedNodes =  $('#rolePermissionTree').tree('getChecked');
+            $.each(checkedNodes,function(index,node){
+                idArray.push(node.id);
+            });
+
+            $.ajax({
+                url:'/role/updateRole',
+                type:'POST',
+                data:$('#updateRoleForm').serialize(),
+                success:function(data){
+                    $(dialog).dialog('destroy');
+                    $('#roleDatagrid').datagrid('reload');
+                },
+                error:function (data) {
+                    $.messager.alert('错误','角色修改失败！','error');
+                }
             });
         }
     </script>

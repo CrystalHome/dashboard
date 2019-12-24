@@ -3,8 +3,10 @@ package cn.crystal.dashboard.base.mapper;
 import cn.crystal.dashboard.base.model.PermissionRole;
 import cn.crystal.dashboard.base.model.Role;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Crystal-Chen
@@ -44,6 +46,18 @@ public interface RoleMapper {
     /**
      * @Description: 根据ID查询角色权限
      */
-    List<PermissionRole> getRolePermissionById(String id);
+    List<PermissionRole> getRolePermissionById(@Param("id") String id);
+
+    /**
+     * @Description: 根据角色ID删除角色权限
+     */
+    int removeRolePermissionByRoleId(@Param("roleId") String roleId);
+
+    /**
+     * @Description: 根据ID添加角色权限
+     * roleId:角色ID
+     * ids:权限ID集合
+     */
+    int createRolePermissionByRoleId();
 
 }

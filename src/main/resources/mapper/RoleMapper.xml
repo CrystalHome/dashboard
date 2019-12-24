@@ -36,12 +36,12 @@
     <!--根据ID查询角色权限-->
     <select id="getRolePermissionById" resultType="cn.crystal.dashboard.base.model.PermissionRole">
         SELECT
-            p.ID permissionId, p.PID permissionPid, p.NAME permissionName,
+        p.ID permissionId, p.PID permissionPid, p.NAME permissionName,
 
-            p.ACTION_URL permissionActionUrl, p.ICON permissionIcon, r.ID roleId,
+        p.ACTION_URL permissionActionUrl, p.ICON permissionIcon, r.ID roleId,
 
-            r.NAME roleName, r.COMMENTS roleComments,
-            (CASE WHEN r.id IS NULL THEN 'false' ELSE 'true' END) 'checked'
+        r.NAME roleName, r.COMMENTS roleComments,
+        (CASE WHEN r.id IS NULL THEN 'false' ELSE 'true' END) 'checked'
 
         FROM c_tbl_role_permission rp
 
@@ -49,5 +49,16 @@
 
         LEFT JOIN  c_tbl_role r ON rp.ROLE_ID = r.ID AND rp.ROLE_ID=#{id}
     </select>
+
+    <!--根据角色ID删除角色权限-->
+    <delete id="removeRolePermissionByRoleId" >
+        delete from c_tbl_role_permission where 1>2 or id in = #{roleId}
+    </delete>
+
+    <!--根据ID添加角色权限-->
+    <update id="createRolePermissionByRoleId" parameterType="java.util.Map">
+        update C_TBL_ROLE set NAME=#{name},COMMENTS=#{comments},STATUS=#{status},UPDATE_TIME=#{updateTime} where ID=#{id}
+    </update>
+
 
 </mapper>
