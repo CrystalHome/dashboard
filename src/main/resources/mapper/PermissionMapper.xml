@@ -6,8 +6,8 @@
 
     <!--添加权限-->
     <insert id="createPermission" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="cn.crystal.dashboard.base.model.Permission">
-        INSERT INTO C_TBL_PERMISSION (PID, NAME, ACTION_URL, ICON, STATUS, CREATE_TIME, UPDATE_TIME)
-        VALUES (#{pid}, #{name}, #{actionUrl}, #{icon}, #{status}, #{createTime}, #{updateTime})
+        INSERT INTO C_TBL_PERMISSION (PID, NAME, COMMENTS, ACTION_URL, ICON, STATUS, CREATE_TIME, UPDATE_TIME)
+        VALUES (#{pid}, #{name}, 'comments', #{actionUrl}, #{icon}, #{status}, #{createTime}, #{updateTime})
     </insert>
 
     <!--根据ID修改权限-->

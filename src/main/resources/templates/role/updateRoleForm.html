@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th='http://www.thymeleaf.org'>
+<body>
+<style>
+    body #updateRoleForm{
+        margin: 20px;
+    }
+
+    body #updateRoleForm div input, body #updateRoleForm div select{
+        width: 200px;
+    }
+
+    body #updateRoleForm div{
+        margin-bottom: 20px;
+    }
+
+</style>
+<form id='updateRoleForm'>
+    <input type="hidden" id="id" name="id" th:value="${role.id}">
+    <div class='form-line'>
+        <label for='name'>角色名称</label>
+        <input id='name' class='easyui-textbox' name='name' data-options='required:true' th:value="${role.name}">
+    </div>
+    <div class='form-line'>
+        <label for='comments'>角色说明</label>
+        <input id='comments' class='easyui-textbox' name='comments' data-options='required:true' th:value="${role.comments}">
+    </div>
+    <div class='form-line'>
+        <label for='status'>角色状态</label>
+        <input type="hidden" id="status" name="status" th:value="${role.status}" >
+        <input id='statusSwitch' style="width: 80px;" th:data-options="'checked:'+${role.status=='1'}">
+    </div>
+</form>
+
+<script type="text/javascript">
+
+    $('#statusSwitch').switchbutton({
+        onText:'启用',
+        offText:'禁用',
+        onChange:function(checked){
+            if(checked){
+                $('#status').val('1');
+            }else{
+                $('#status').val('0');
+            }
+        }
+    })
+</script>
+</body>

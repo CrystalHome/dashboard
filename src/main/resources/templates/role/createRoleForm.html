@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th='http://www.thymeleaf.org'>
+<body>
+<style>
+    body #createRoleForm{
+        margin: 20px;
+    }
+
+    body #createRoleForm div input, body #createRoleForm div select{
+        width: 200px;
+    }
+
+    body #createRoleForm div{
+        margin-bottom: 20px;
+    }
+
+</style>
+<form id='createRoleForm'>
+    <div class='form-line'>
+        <label for='name'>角色名称</label>
+        <input id='name' class='easyui-textbox' name='name' data-options='required:true'>
+    </div>
+    <div class='form-line'>
+        <label for='comments'>角色说明</label>
+        <input id='comments' class='easyui-textbox' name='comments' data-options='required:true'>
+    </div>
+    <div class='form-line'>
+        <label for='status'>角色状态</label>
+        <input type="hidden" id="status" name="status" value="1">
+        <input id='statusSwitch' style="width: 80px;">
+    </div>
+</form>
+
+<script type="text/javascript">
+
+    $('#statusSwitch').switchbutton({
+        checked: true,
+        onText:'启用',
+        offText:'禁用',
+        onChange:function(checked){
+            if(checked){
+                $('#status').val('1');
+            }else{
+                $('#status').val('0');
+            }
+        }
+    })
+</script>
+</body>

@@ -20,8 +20,8 @@
         <div data-options="border:false, showHeader:false, split:true, collapsible:false, region:'center'">
             <table id="roleDatagrid" ></table>
         </div>
-        <div data-options="border:true, split:false, iconCls:'icon-lock', collapsible:false, region:'east',title:'权限'" style="width:300px;">
-            aaa
+        <div id="rolePermissionArea" data-options="border:true, split:false, iconCls:'icon-lock', collapsible:false, region:'east',title:'请选择要修改权限的角色'" style="width:300px;">
+            <ul id="rolePermissionTree"></ul>
         </div>
     </div>
     <script type="text/javascript">
@@ -62,8 +62,8 @@
                     {field:'createTime',title:'创建时间',width:80},
                     {field:'action',title:'管理',width:80,formatter:function(value,row,index){
                             var actionBtns = [];
-                            actionBtns.push('<a class="action fa fa-edit" onclick="updateDialog('+row.id+')">编辑</a>')
-                            actionBtns.push('<a class="action fa fa-trash-o" onclick="deleteDialog('+row.id+')">删除</a>')
+                            actionBtns.push('<a class="action fa fa-edit" onclick="updateRoleDialog('+row.id+')">编辑</a>')
+                            actionBtns.push('<a class="action fa fa-trash-o" onclick="deleteRoleDialog('+row.id+')">删除</a>')
                             return actionBtns.join('');
                         }}
                 ]
@@ -73,7 +73,7 @@
                     text:'添加角色',
                     iconCls:'icon-add',
                     handler:function () {
-                        createDialog();
+                        createRoleDialog();
                     }
                 },'-',
                 {
@@ -83,8 +83,142 @@
                         $('#roleDatagrid').datagrid('reload');
                     }
                 }
-            ]
+            ],
+            onSelect:function (index,row) {
+               onSelectRoleRow(row);
+            }
         });
+
+        /**
+         * 删除对话框
+         */
+        function deleteRoleDialog(id) {
+            $.messager.confirm('角色删除', '您确定要删除角色吗？', function(confirm){
+                if (confirm){
+                    $.ajax({
+                        url:'/role/removeRoleById/'+id,
+                        type:'POST',
+                        success:function(data){
+                            $('#roleDatagrid').datagrid('reload');
+                        },
+                        error:function (data) {
+                            $.messager.alert('错误','角色删除失败！','error');
+                        }
+                    });
+                }
+            });
+        }
+
+        /**
+         * 添加对话框
+         */
+        function createRoleDialog(){
+            var dialog = $("<div />").dialog({
+                width : 350,
+                height : 370,
+                modal : true,
+                title:'添加角色',
+                closable:false,
+                href:'/role/createRoleForm',
+                buttons:[{
+                    text:'保存',
+                    iconCls:'icon-lock',
+                    handler:function(){
+                        saveRole(dialog);
+                    }
+                },{
+                    text:'取消',
+                    iconCls:'icon-lock',
+                    handler:function(){
+                        $(dialog).dialog('destroy');
+                    }
+                }]
+
+            });
+        }
+
+        /**
+         * 请求后台添加
+         */
+        function saveRole(dialog){
+            var validateStatus = $('#createRoleForm').form("validate");
+            if(validateStatus){
+                $.ajax({
+                    url:'/role/createRole',
+                    type:'POST',
+                    data:$('#createRoleForm').serialize(),
+                    success:function(data){
+                        $(dialog).dialog('destroy');
+                        $('#roleDatagrid').datagrid('reload');
+                    },
+                    error:function (data) {
+                        $.messager.alert('错误','角色添加失败！','error');
+                    }
+                });
+            }
+        }
+
+        /**
+         * 修改对话框
+         */
+        function updateRoleDialog(id){
+            var dialog = $("<div />").dialog({
+                width : 350,
+                height : 370,
+                modal : true,
+                title:'修改角色',
+                closable:false,
+                href:'/role/updateRoleForm/'+id,
+                buttons:[{
+                    text:'保存',
+                    iconCls:'icon-lock',
+                    handler:function(){
+                        updateRole(dialog);
+                    }
+                },{
+                    text:'取消',
+                    iconCls:'icon-lock',
+                    handler:function(){
+                        $(dialog).dialog('destroy');
+                    }
+                }]
+
+            });
+        }
+
+        /**
+         * 请求后台修改
+         */
+        function updateRole(dialog){
+            var validateStatus = $('#updateRoleForm').form("validate");
+            if(validateStatus){
+                $.ajax({
+                    url:'/role/updateRole',
+                    type:'POST',
+                    data:$('#updateRoleForm').serialize(),
+                    success:function(data){
+                        $(dialog).dialog('destroy');
+                        $('#roleDatagrid').datagrid('reload');
+                    },
+                    error:function (data) {
+                        $.messager.alert('错误','角色修改失败！','error');
+                    }
+                });
+            }
+        }
+
+        /**
+         * 加载角色权限
+         */
+        function onSelectRoleRow(row) {
+            $("#rolePermissionArea").panel('setTitle','['+row.name+']权限修改');
+            $('#rolePermissionTree').tree({
+                url:'/role/getRolePermissionById/'+row.id,
+                method:'post',
+                checkbox:true,
+                lines:true
+            });
+        }
     </script>
 </body>
 </html>

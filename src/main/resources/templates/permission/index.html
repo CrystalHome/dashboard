@@ -65,8 +65,8 @@
                     {field:'createTime',title:'创建时间',width:80},
                     {field:'action',title:'管理',width:80,formatter:function(value,row,index){
                         var actionBtns = [];
-                        actionBtns.push('<a class="action fa fa-edit" onclick="updateDialog('+row.id+')">编辑</a>')
-                        actionBtns.push('<a class="action fa fa-trash-o" onclick="deleteDialog('+row.id+')">删除</a>')
+                        actionBtns.push('<a class="action fa fa-edit" onclick="updatePermissionDialog('+row.id+')">编辑</a>')
+                        actionBtns.push('<a class="action fa fa-trash-o" onclick="deletePermissionDialog('+row.id+')">删除</a>')
                         return actionBtns.join('');
                         }}
                 ]
@@ -76,7 +76,7 @@
                     text:'添加权限',
                     iconCls:'icon-lock',
                     handler:function () {
-                        createDialog();
+                        createPermissionDialog();
                     }
                 },'-',
                 {
@@ -89,7 +89,10 @@
             ]
         });
 
-        function deleteDialog(id) {
+        /**
+         * 删除对话框
+         */
+        function deletePermissionDialog(id) {
             $.messager.confirm('权限删除', '您确定要删除权限吗？', function(confirm){
                 if (confirm){
                     $.ajax({
@@ -111,7 +114,7 @@
         /**
          * 添加对话框
          */
-        function createDialog(){
+        function createPermissionDialog(){
             var dialog = $("<div />").dialog({
                 width : 350,
                 height : 370,
@@ -161,7 +164,7 @@
         /**
          * 修改对话框
          */
-        function updateDialog(id){
+        function updatePermissionDialog(id){
             var dialog = $("<div />").dialog({
                 width : 350,
                 height : 370,

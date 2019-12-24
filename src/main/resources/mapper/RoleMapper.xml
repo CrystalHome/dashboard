@@ -33,4 +33,21 @@
         select * from C_TBL_ROLE where 1=1 and id=#{id}
     </select>
 
+    <!--根据ID查询角色权限-->
+    <select id="getRolePermissionById" resultType="cn.crystal.dashboard.base.model.PermissionRole">
+        SELECT
+            p.ID permissionId, p.PID permissionPid, p.NAME permissionName,
+
+            p.ACTION_URL permissionActionUrl, p.ICON permissionIcon, r.ID roleId,
+
+            r.NAME roleName, r.COMMENTS roleComments,
+            (CASE WHEN r.id IS NULL THEN 'false' ELSE 'true' END) 'checked'
+
+        FROM c_tbl_role_permission rp
+
+        RIGHT JOIN  c_tbl_permission p  ON rp.PERMISSION_ID = p.ID
+
+        LEFT JOIN  c_tbl_role r ON rp.ROLE_ID = r.ID AND rp.ROLE_ID=#{id}
+    </select>
+
 </mapper>

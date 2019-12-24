@@ -1,5 +1,6 @@
 package cn.crystal.dashboard.base.mapper;
 
+import cn.crystal.dashboard.base.model.PermissionRole;
 import cn.crystal.dashboard.base.model.Role;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -39,5 +40,10 @@ public interface RoleMapper {
      * @Description: 根据ID查询角色
      */
     Role getRoleById(String id);
+
+    /**
+     * @Description: 根据ID查询角色权限
+     */
+    List<PermissionRole> getRolePermissionById(String id);
 
 }
