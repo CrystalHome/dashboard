@@ -34,7 +34,7 @@ public class PermissionMidRole {
     /**
      * @Description: 图标样式
      */
-    private String permissionIcon;
+    private String iconCls;
 
     /**
      * @Description: 角色ID
@@ -90,12 +90,12 @@ public class PermissionMidRole {
         this.permissionActionUrl = permissionActionUrl;
     }
 
-    public String getPermissionIcon() {
-        return permissionIcon;
+    public String getIconCls() {
+        return iconCls;
     }
 
-    public void setPermissionIcon(String permissionIcon) {
-        this.permissionIcon = permissionIcon;
+    public void setIconCls(String iconCls) {
+        this.iconCls = iconCls;
     }
 
     public String getRoleId() {
@@ -122,7 +122,7 @@ public class PermissionMidRole {
         this.roleComments = roleComments;
     }
 
-    public boolean getChecked() {
+    public boolean isChecked() {
         return checked;
     }
 
@@ -145,11 +145,11 @@ public class PermissionMidRole {
                 .add("permissionPid='" + permissionPid + "'")
                 .add("text='" + text + "'")
                 .add("permissionActionUrl='" + permissionActionUrl + "'")
-                .add("permissionIcon='" + permissionIcon + "'")
+                .add("iconCls='" + iconCls + "'")
                 .add("roleId='" + roleId + "'")
                 .add("roleName='" + roleName + "'")
                 .add("roleComments='" + roleComments + "'")
-                .add("checked='" + checked + "'")
+                .add("checked=" + checked)
                 .add("children=" + children)
                 .toString();
     }

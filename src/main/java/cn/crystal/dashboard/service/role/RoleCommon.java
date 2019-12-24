@@ -68,7 +68,7 @@ public class RoleCommon {
         easyUiPermission.setPermissionPid(permission.getPermissionPid());
         easyUiPermission.setText(permission.getPermissionName());
         easyUiPermission.setPermissionActionUrl(permission.getPermissionActionUrl());
-        easyUiPermission.setPermissionIcon(permission.getPermissionIcon());
+        easyUiPermission.setIconCls(permission.getPermissionIcon());
         easyUiPermission.setRoleId(permission.getRoleId());
         easyUiPermission.setRoleName(permission.getRoleName());
         easyUiPermission.setRoleComments(permission.getRoleComments());

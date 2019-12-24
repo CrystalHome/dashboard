@@ -12,30 +12,30 @@ MySQL - 5.5.20 : Database - dashboard
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-CREATE DATABASE /*!32312 IF NOT EXISTS*/dashboard /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`dashboard` /*!40100 DEFAULT CHARACTER SET utf8 */;
 
-USE dashboard;
+USE `dashboard`;
 
-/*Table structure for table c_tbl_permission */
+/*Table structure for table `c_tbl_permission` */
 
-DROP TABLE IF EXISTS c_tbl_permission;
+DROP TABLE IF EXISTS `c_tbl_permission`;
 
-CREATE TABLE c_tbl_permission (
-  ID int(255) NOT NULL AUTO_INCREMENT COMMENT '唯一标识',
-  PID int(255) NOT NULL COMMENT '父ID',
-  NAME varchar(50) NOT NULL COMMENT '资源名称',
-  COMMENTS varchar(255) NOT NULL COMMENT '备注',
-  ACTION_URL varchar(255) NOT NULL DEFAULT '/' COMMENT '事件地址',
-  ICON varchar(522) NOT NULL DEFAULT 'icon-lock' COMMENT '图标',
-  STATUS char(1) NOT NULL COMMENT '记录状态 0无效 1有效',
-  CREATE_TIME varchar(19) NOT NULL DEFAULT 'CURRENT_TIMESTAMP' COMMENT '记录创建时间',
-  UPDATE_TIME varchar(19) NOT NULL DEFAULT 'CURRENT_TIMESTAMP' COMMENT '记录修改时间',
-  PRIMARY KEY (ID)
+CREATE TABLE `c_tbl_permission` (
+  `ID` int(255) NOT NULL AUTO_INCREMENT COMMENT '唯一标识',
+  `PID` int(255) NOT NULL COMMENT '父ID',
+  `NAME` varchar(50) NOT NULL COMMENT '资源名称',
+  `COMMENTS` varchar(255) NOT NULL COMMENT '备注',
+  `ACTION_URL` varchar(255) NOT NULL DEFAULT '/' COMMENT '事件地址',
+  `ICON` varchar(522) NOT NULL DEFAULT 'icon-lock' COMMENT '图标',
+  `STATUS` char(1) NOT NULL COMMENT '记录状态 0无效 1有效',
+  `CREATE_TIME` varchar(19) NOT NULL DEFAULT 'CURRENT_TIMESTAMP' COMMENT '记录创建时间',
+  `UPDATE_TIME` varchar(19) NOT NULL DEFAULT 'CURRENT_TIMESTAMP' COMMENT '记录修改时间',
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
-/*Data for the table c_tbl_permission */
+/*Data for the table `c_tbl_permission` */
 
-insert  into c_tbl_permission(ID,PID,NAME,COMMENTS,ACTION_URL,ICON,STATUS,CREATE_TIME,UPDATE_TIME) values 
+insert  into `c_tbl_permission`(`ID`,`PID`,`NAME`,`COMMENTS`,`ACTION_URL`,`ICON`,`STATUS`,`CREATE_TIME`,`UPDATE_TIME`) values 
 (1,0,'权限管理','','/permission/index','icon-lock','1','2019-12-08 23:55:45','2019-12-08 23:55:45'),
 (2,1,'权限配置','','/permission/index','icon-lock','1','2019-12-08 23:55:45','2019-12-08 23:55:45'),
 (3,0,'角色管理','','/defaultAction','icon-lock','1','2019-12-08 23:55:45','2019-12-08 23:55:45'),
@@ -59,23 +59,23 @@ insert  into c_tbl_permission(ID,PID,NAME,COMMENTS,ACTION_URL,ICON,STATUS,CREATE
 (21,15,'图片核审','','/defaultAction','icon-lock','1','2019-12-08 23:55:45','2019-12-08 23:55:45'),
 (22,15,'文章管理','','/defaultAction','icon-lock','1','2019-12-08 23:55:45','2019-12-08 23:55:45');
 
-/*Table structure for table c_tbl_role */
+/*Table structure for table `c_tbl_role` */
 
-DROP TABLE IF EXISTS c_tbl_role;
+DROP TABLE IF EXISTS `c_tbl_role`;
 
-CREATE TABLE c_tbl_role (
-  ID int(255) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  NAME varchar(30) NOT NULL COMMENT '角色名称',
-  COMMENTS varchar(255) NOT NULL COMMENT '备注',
-  STATUS char(1) NOT NULL DEFAULT '0' COMMENT '记录状态 0无效 1有效',
-  CREATE_TIME varchar(19) NOT NULL COMMENT '记录创建时间',
-  UPDATE_TIME varchar(19) NOT NULL COMMENT '记录修改时间',
-  PRIMARY KEY (ID)
+CREATE TABLE `c_tbl_role` (
+  `ID` int(255) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `NAME` varchar(30) NOT NULL COMMENT '角色名称',
+  `COMMENTS` varchar(255) NOT NULL COMMENT '备注',
+  `STATUS` char(1) NOT NULL DEFAULT '0' COMMENT '记录状态 0无效 1有效',
+  `CREATE_TIME` varchar(19) NOT NULL COMMENT '记录创建时间',
+  `UPDATE_TIME` varchar(19) NOT NULL COMMENT '记录修改时间',
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
-/*Data for the table c_tbl_role */
+/*Data for the table `c_tbl_role` */
 
-insert  into c_tbl_role(ID,NAME,COMMENTS,STATUS,CREATE_TIME,UPDATE_TIME) values 
+insert  into `c_tbl_role`(`ID`,`NAME`,`COMMENTS`,`STATUS`,`CREATE_TIME`,`UPDATE_TIME`) values 
 (1,'Admin','系统管理员','1','2019-12-08 23:55:45','2019-12-08 23:55:45'),
 (2,'EMAIL','邮件系统管理员','1','2019-12-08 23:55:45','2019-12-08 23:55:45'),
 (3,'BLOG','博客系统管理员','1','2019-12-08 23:55:45','2019-12-08 23:55:45'),
@@ -84,16 +84,20 @@ insert  into c_tbl_role(ID,NAME,COMMENTS,STATUS,CREATE_TIME,UPDATE_TIME) values
 (6,'LOG','日志系统管理员','1','2019-12-08 23:55:45','2019-12-08 23:55:45'),
 (7,'MONITOR','监控系统管理员','1','2019-12-08 23:55:45','2019-12-08 23:55:45');
 
-/*Table structure for table c_tbl_role_permission */
+/*Table structure for table `c_tbl_role_permission` */
 
-DROP TABLE IF EXISTS c_tbl_role_permission;
+DROP TABLE IF EXISTS `c_tbl_role_permission`;
 
-CREATE TABLE c_tbl_role_permission (
-  ID int(255) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  PRIMARY KEY (ID)
+CREATE TABLE `c_tbl_role_permission` (
+  `ID` int(255) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `ROLE_ID` int(255) NOT NULL COMMENT '角色ID',
+  `PERMISSION_ID` int(255) NOT NULL COMMENT '权限ID',
+  `CREATE_TIME` varchar(19) NOT NULL COMMENT '2019-12-24 22:00:16',
+  `UPDATE_TIME` varchar(19) NOT NULL COMMENT '2019-12-24 22:00:16',
+  PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-/*Data for the table c_tbl_role_permission */
+/*Data for the table `c_tbl_role_permission` */
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
