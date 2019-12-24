@@ -57,6 +57,16 @@ public class PermissionRole {
      */
     private String checked;
 
+    /**
+     * @Description: 创建时间,格式:yyyy-MM-dd HH:mm:ss
+     */
+    private String createTime;
+
+    /**
+     * @Description: 更新时间,格式:yyyy-MM-dd HH:mm:ss
+     */
+    private String updateTime;
+
     public String getPermissionId() {
         return permissionId;
     }
@@ -129,6 +139,22 @@ public class PermissionRole {
         this.checked = checked;
     }
 
+    public String getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", PermissionRole.class.getSimpleName() + "[", "]")
@@ -141,6 +167,8 @@ public class PermissionRole {
                 .add("roleName='" + roleName + "'")
                 .add("roleComments='" + roleComments + "'")
                 .add("checked='" + checked + "'")
+                .add("createTime='" + createTime + "'")
+                .add("updateTime='" + updateTime + "'")
                 .toString();
     }
 }

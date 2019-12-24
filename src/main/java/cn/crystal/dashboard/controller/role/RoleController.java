@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -99,5 +100,14 @@ public class RoleController {
     @RequestMapping("getRolePermissionById/{id}")
     public List<PermissionMidRole> getRolePermissionById(@PathVariable(name = "id") String id){
         return roleService.getRolePermissionById(id);
+    }
+
+    /**
+     * @Description: 根据ID查询角色权限
+     */
+    @ResponseBody
+    @RequestMapping("updateRolePermission/{id}")
+    public void updateRolePermission(@PathVariable(name = "id") String roleId, String ids){
+        roleService.updateRolePermission(roleId, Arrays.asList(ids.split(",")));
     }
 }

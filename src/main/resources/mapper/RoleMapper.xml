@@ -52,13 +52,17 @@
 
     <!--根据角色ID删除角色权限-->
     <delete id="removeRolePermissionByRoleId" >
-        delete from c_tbl_role_permission where 1>2 or id in = #{roleId}
+        delete from c_tbl_role_permission where 1>2 or ROLE_ID = #{roleId}
     </delete>
 
     <!--根据ID添加角色权限-->
-    <update id="createRolePermissionByRoleId" parameterType="java.util.Map">
-        update C_TBL_ROLE set NAME=#{name},COMMENTS=#{comments},STATUS=#{status},UPDATE_TIME=#{updateTime} where ID=#{id}
-    </update>
+    <insert id="createRolePermissionByRoleId" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="java.util.List">
+        INSERT INTO c_tbl_role_permission(ROLE_ID,PERMISSION_ID,CREATE_TIME,UPDATE_TIME)
+        VALUES
+        <foreach collection="list" item="roleMidPermission" index="index" separator=",">
+            (#{roleMidPermission.roleId},#{roleMidPermission.permissionId},#{roleMidPermission.createTime},#{roleMidPermission.updateTime})
+        </foreach>
+    </insert>
 
 
 </mapper>

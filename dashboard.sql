@@ -35,9 +35,6 @@ CREATE TABLE c_tbl_permission (
 
 /*Data for the table c_tbl_permission */
 
-DELETE FROM c_tbl_permission WHERE 1=1;
-TRUNCATE TABLE c_tbl_permission;
-
 insert  into c_tbl_permission(ID,PID,NAME,COMMENTS,ACTION_URL,ICON,STATUS,CREATE_TIME,UPDATE_TIME) values 
 (1,0,'权限管理','','/permission/index','icon-lock','1','2019-12-08 23:55:45','2019-12-08 23:55:45'),
 (2,1,'权限配置','','/permission/index','icon-lock','1','2019-12-08 23:55:45','2019-12-08 23:55:45'),
@@ -78,10 +75,6 @@ CREATE TABLE c_tbl_role (
 
 /*Data for the table c_tbl_role */
 
-DELETE FROM c_tbl_role WHERE 1=1;
-TRUNCATE TABLE c_tbl_role;
-
-
 insert  into c_tbl_role(ID,NAME,COMMENTS,STATUS,CREATE_TIME,UPDATE_TIME) values 
 (1,'Admin','系统管理员','1','2019-12-08 23:55:45','2019-12-08 23:55:45'),
 (2,'EMAIL','邮件系统管理员','1','2019-12-08 23:55:45','2019-12-08 23:55:45'),
@@ -101,10 +94,6 @@ CREATE TABLE c_tbl_role_permission (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table c_tbl_role_permission */
-
-DELETE FROM c_tbl_role_permission WHERE 1=1;
-TRUNCATE TABLE c_tbl_role_permission;
-
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

@@ -3,11 +3,13 @@ package cn.crystal.dashboard.service.role;
 import cn.crystal.dashboard.base.mapper.RoleMapper;
 import cn.crystal.dashboard.base.model.PermissionRole;
 import cn.crystal.dashboard.base.model.Role;
+import cn.crystal.dashboard.base.model.RoleMidPermission;
 import cn.crystal.dashboard.controller.webmodel.PermissionMidRole;
 import cn.crystal.dashboard.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -73,5 +75,24 @@ public class RoleService {
         List<PermissionRole> permissionRoles = roleMapper.getRolePermissionById(id);
         List<PermissionMidRole> permissionMidRoles = RoleCommon.parsePermissionTree(permissionRoles);
         return permissionMidRoles;
+    }
+
+    /**
+     * @Description: 根据ID查询角色权限
+     */
+    public int updateRolePermission(String roleId, List<String> ids){
+        int removeRows = roleMapper.removeRolePermissionByRoleId(roleId);
+        List<RoleMidPermission> roleMidPermissions = new ArrayList<>(ids.size());
+        String currentTime = DateUtils.getCurrentDateString();
+        for (String permissionId : ids) {
+            RoleMidPermission roleMidPermission = new RoleMidPermission();
+            roleMidPermission.setRoleId(roleId);
+            roleMidPermission.setPermissionId(permissionId);
+            roleMidPermission.setUpdateTime(currentTime);
+            roleMidPermission.setCreateTime(currentTime);
+            roleMidPermissions.add(roleMidPermission);
+        }
+        int createRows = roleMapper.createRolePermissionByRoleId(roleMidPermissions);
+        return removeRows+createRows;
     }
 }

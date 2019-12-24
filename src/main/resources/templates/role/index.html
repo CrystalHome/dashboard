@@ -245,10 +245,14 @@
                 idArray.push(node.id);
             });
 
+            var getSelectedRow = $("#roleDatagrid").datagrid('getSelected');
+
+            var roleId = getSelectedRow.id;
+
             $.ajax({
-                url:'/role/updateRole',
+                url:'/role/updateRolePermission/'+roleId,
                 type:'POST',
-                data:$('#updateRoleForm').serialize(),
+                data:{ids:idArray.join(',')},
                 success:function(data){
                     $(dialog).dialog('destroy');
                     $('#roleDatagrid').datagrid('reload');

@@ -2,11 +2,11 @@ package cn.crystal.dashboard.base.mapper;
 
 import cn.crystal.dashboard.base.model.PermissionRole;
 import cn.crystal.dashboard.base.model.Role;
+import cn.crystal.dashboard.base.model.RoleMidPermission;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author Crystal-Chen
@@ -58,6 +58,6 @@ public interface RoleMapper {
      * roleId:角色ID
      * ids:权限ID集合
      */
-    int createRolePermissionByRoleId();
+    int createRolePermissionByRoleId(List<RoleMidPermission> roleMidPermissions);
 
 }
